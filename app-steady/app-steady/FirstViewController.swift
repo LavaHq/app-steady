@@ -35,6 +35,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     @IBAction func nextQuestionButtonPressed(sender: AnyObject) {
         self.mainQuestion = nextQuestion()
         self.questionLabel.text = mainQuestion.askQuestion
+        self.answerLabel.text = ""
     }
     
     //MARK: - Delegates and data sources
