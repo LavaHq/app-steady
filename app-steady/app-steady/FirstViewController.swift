@@ -32,8 +32,9 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
         nextQuestionButton.frame = CGRectMake(50, 400, 200, 21)
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(nextQuestionButton)
         
+        self.view.addSubview(nextQuestionButton)
+        self.view.addSubview(questionLabel)
         answerPicker.dataSource = self
         answerPicker.delegate = self
     }
