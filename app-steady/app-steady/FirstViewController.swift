@@ -10,10 +10,7 @@ import UIKit
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var nextQuestionButton: UIButton!
     @IBOutlet weak var answerPicker: UIPickerView!
-    @IBOutlet weak var answerLabel: UILabel!
     
     var mainQuestion = nextQuestion()
     
@@ -22,7 +19,21 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let questionLabel = UILabel(frame: CGRectMake(0, 0, 200, 21))
+        questionLabel.textAlignment = NSTextAlignment.Center
         questionLabel.text = mainQuestion.askQuestion
+        
+        let answerLabel = UILabel(frame: CGRectMake(0, 100, 200, 21))
+        answerLabel.textAlignment = NSTextAlignment.Center
+        answerLabel.text = ""
+        
+        let nextQuestionButton = UIButton(type: UIButtonType.System)
+        nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
+        nextQuestionButton.frame = CGRectMake(0, 200, 200, 21)
+        nextQuestionButton.addTarget(self, action: #selector(FirstViewController.nexQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(nextQuestionButton)
+        
         answerPicker.dataSource = self
         answerPicker.delegate = self
     }
@@ -32,10 +43,11 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func nextQuestionButtonPressed(sender: AnyObject) {
-        self.mainQuestion = nextQuestion()
-        self.questionLabel.text = mainQuestion.askQuestion
-        self.answerLabel.text = ""
+    func nextQuestionButtonPressed(sender: UIButton!) {
+        mainQuestion = nextQuestion()
+        questionLabel.text = mainQuestion.askQuestion
+        NSLog(answerLabel.text)
+        answerLabel.text = ""
     }
     
     //MARK: - Delegates and data sources
