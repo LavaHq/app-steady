@@ -11,6 +11,9 @@ import UIKit
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     @IBOutlet weak var answerPicker: UIPickerView!
+    var questionLabel = UILabel(frame: CGRectMake(0, 0, 200, 21))
+    var answerLabel = UILabel(frame: CGRectMake(0, 100, 200, 21))
+    let nextQuestionButton = UIButton(type: UIButtonType.System)
     
     var mainQuestion = nextQuestion()
     
@@ -20,15 +23,13 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let questionLabel = UILabel(frame: CGRectMake(0, 0, 200, 21))
+        
         questionLabel.textAlignment = NSTextAlignment.Center
         questionLabel.text = mainQuestion.askQuestion
         
-        let answerLabel = UILabel(frame: CGRectMake(0, 100, 200, 21))
         answerLabel.textAlignment = NSTextAlignment.Center
         answerLabel.text = ""
         
-        let nextQuestionButton = UIButton(type: UIButtonType.System)
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
         nextQuestionButton.frame = CGRectMake(0, 200, 200, 21)
         nextQuestionButton.addTarget(self, action: #selector(FirstViewController.nexQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
@@ -45,9 +46,9 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func nextQuestionButtonPressed(sender: UIButton!) {
         mainQuestion = nextQuestion()
-        questionLabel.text = mainQuestion.askQuestion
-        NSLog(answerLabel.text)
-        answerLabel.text = ""
+        self.questionLabel.text = mainQuestion.askQuestion
+        NSLog(self.answerLabel.text!)
+        self.answerLabel.text = ""
     }
     
     //MARK: - Delegates and data sources
