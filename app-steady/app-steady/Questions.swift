@@ -24,15 +24,13 @@ let q8 = Question(askQuestion: "Did you do your best to keep a good posture?")
 let q9 = Question(askQuestion: "Did you do your best to get a good night's sleep?")
 let q0 = Question(askQuestion: "Did you do your best to work on programming?")
 
-let finished = Question(askQuestion: "All Done!")
-
 let questionsList = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q0]
 
 var questionIndex = 0
 
-func nextQuestion() -> Question {
+func nextQuestion() -> Question? {
     if questionIndex == questionsList.count{
-        return finished
+        return nil
     }
         let question = questionsList[questionIndex]
         questionIndex += 1
