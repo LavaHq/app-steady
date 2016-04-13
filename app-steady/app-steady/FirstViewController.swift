@@ -10,9 +10,9 @@ import UIKit
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
-    @IBOutlet weak var answerPicker: UIPickerView!
-    var questionLabel = UILabel(frame: CGRectMake(50, 150, 200, 21))
-    var answerLabel = UILabel(frame: CGRectMake(50, 200, 200, 21))
+    var answerPicker = UIPickerView(frame: CGRectMake(100, 400, 200, 100))
+    var questionLabel = UILabel(frame: CGRectMake(100, 100, 200, 21))
+    var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
     let nextQuestionButton = UIButton(type: UIButtonType.System)
     
     var mainQuestion = nextQuestion()
@@ -24,17 +24,20 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         // Do any additional setup after loading the view, typically from a nib.
         
         questionLabel.textAlignment = NSTextAlignment.Center
-        questionLabel.text = "testing"
+        questionLabel.text = mainQuestion!.askQuestion
         
         answerLabel.textAlignment = NSTextAlignment.Center
         answerLabel.text = ""
         
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
-        nextQuestionButton.frame = CGRectMake(50, 400, 200, 21)
+        nextQuestionButton.frame = CGRectMake(100, 600, 200, 21)
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         
-        self.view.addSubview(nextQuestionButton)
+        self.view.addSubview(answerPicker)
         self.view.addSubview(questionLabel)
+        self.view.addSubview(answerLabel)
+        self.view.addSubview(nextQuestionButton)
+
         answerPicker.dataSource = self
         answerPicker.delegate = self
         
