@@ -10,6 +10,8 @@ import UIKit
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
+    let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+    
     var answerPicker = UIPickerView(frame: CGRectMake(100, 400, 200, 100))
     var questionLabel = UILabel(frame: CGRectMake(100, 100, 200, 21))
     var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
@@ -27,7 +29,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         questionLabel.text = mainQuestion!.askQuestion
         
         answerLabel.textAlignment = NSTextAlignment.Center
-        answerLabel.text = ""
+        answerLabel.hidden = true
         
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
         nextQuestionButton.frame = CGRectMake(100, 600, 200, 21)
@@ -56,8 +58,8 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         }
         
         self.questionLabel.text = mainQuestion!.askQuestion
-        NSLog(self.answerLabel.text!)
-        self.answerLabel.text = ""
+        self.answerLabel.hidden = true
+        print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
     }
     
     //MARK: - Delegates and data sources
@@ -76,6 +78,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         answerLabel.text = pickerData[row]
+        answerLabel.hidden = false
     }
 }
 
