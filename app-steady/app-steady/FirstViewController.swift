@@ -37,6 +37,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.view.addSubview(questionLabel)
         answerPicker.dataSource = self
         answerPicker.delegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +47,12 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func nextQuestionButtonPressed(sender: UIButton!) {
         mainQuestion = nextQuestion()
-        self.questionLabel.text = mainQuestion.askQuestion
+        if (mainQuestion == nil)  {
+            tabBarController?.selectedIndex = 1
+            return
+        }
+        
+        self.questionLabel.text = mainQuestion!.askQuestion
         NSLog(self.answerLabel.text!)
         self.answerLabel.text = ""
     }
