@@ -24,27 +24,38 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.initializeQuestionLabel()
+        self.initializeAnswerPicker()
+        self.initializeNextQuestionButton()
+        self.initializeAnswerPicker()
+    }
+    
+    func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
         questionLabel.text = mainQuestion!.askQuestion
-        
+        self.view.addSubview(questionLabel)
+    }
+    
+    func initializeAnswerLabel() {
         answerLabel.textAlignment = NSTextAlignment.Center
         answerLabel.hidden = true
-        
+        self.view.addSubview(answerLabel)
+    }
+    
+    func initializeNextQuestionButton () {
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
         nextQuestionButton.frame = CGRectMake(100, 600, 200, 21)
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
-        
-        self.view.addSubview(answerPicker)
-        self.view.addSubview(questionLabel)
-        self.view.addSubview(answerLabel)
         self.view.addSubview(nextQuestionButton)
-
+    }
+    
+    func initializeAnswerPicker() {
+        self.view.addSubview(answerPicker)
         answerPicker.dataSource = self
         answerPicker.delegate = self
-        
     }
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
