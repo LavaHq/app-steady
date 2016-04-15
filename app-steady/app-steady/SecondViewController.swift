@@ -11,11 +11,17 @@ import Charts
 
 class SecondViewController: UIViewController {
     
-    //var lineChart = lineChartView(frame: CGRectMake(100, 100, 400, 400))
+    var lineChart = LineChartView(frame: CGRectMake(100, 100, 400, 400))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.initializeLineChart()
+    }
+    
+    func initializeLineChart(){
+        self.view.addSubview(lineChart)
     }
 
     override func didReceiveMemoryWarning() {
