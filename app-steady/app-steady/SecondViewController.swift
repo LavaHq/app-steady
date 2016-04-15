@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Charts
 
 class SecondViewController: UIViewController {
+    
+    //var lineChart = lineChartView(frame: CGRectMake(100, 100, 400, 400))
 
     override func viewDidLoad() {
         super.viewDidLoad()
