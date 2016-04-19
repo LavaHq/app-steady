@@ -1,3 +1,7 @@
 #Ignore files
 
 .DS_Store
+pods/
+app-steady.xcworkspace
+Podfile.lock
+xcuserdata
