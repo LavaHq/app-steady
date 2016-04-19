@@ -1,2 +1,2 @@
 # app-steady
-iPhone application for steady api
+iPhone application for answering daily questions
