@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
@@ -28,6 +29,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.initializeAnswerPicker()
         self.initializeNextQuestionButton()
         self.initializeAnswerPicker()
+        self.initializeAlamofire()
     }
     
     func initializeQuestionLabel() {
@@ -53,6 +55,19 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.view.addSubview(answerPicker)
         answerPicker.dataSource = self
         answerPicker.delegate = self
+    }
+    
+    func initializeAlamofire() {
+        Alamofire.request(.GET, "localhost/prompts") .responseJSON { response in // 1
+            print(response.request)  // original URL request
+            print(response.response) // URL response
+            print(response.data)     // server data
+            print(response.result)   // result of response serialization
+            
+            if let JSON = response.result.value {
+                print("JSON: \(JSON)")
+            }
+        }
     }
     
     
