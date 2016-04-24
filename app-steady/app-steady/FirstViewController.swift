@@ -58,7 +58,12 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     }
     
     func initializeAlamofire() {
-        Alamofire.request(.GET, "localhost/prompts") .responseJSON { response in // 1
+        Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
+            if let httpError = response.result.error {
+                let statusCode = httpError.code
+            } else { //no errors
+                let statusCode = (response.response?.statusCode)!
+            }
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
