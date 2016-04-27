@@ -25,11 +25,10 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.initializeAlamofire()
         self.initializeQuestionLabel()
         self.initializeAnswerPicker()
         self.initializeNextQuestionButton()
-        self.initializeAnswerPicker()
-        self.initializeAlamofire()
     }
     
     func initializeQuestionLabel() {
@@ -59,19 +58,19 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func initializeAlamofire() {
         Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
-            if let httpError = response.result.error {
-                let statusCode = httpError.code
-            } else { //no errors
-                let statusCode = (response.response?.statusCode)!
-            }
+
             print(response.request)  // original URL request
             print(response.response) // URL response
             print(response.data)     // server data
             print(response.result)   // result of response serialization
             
+            
+             response.result.value
             if let JSON = response.result.value {
                 print("JSON: \(JSON)")
+                // Have the
             }
+            
         }
     }
     

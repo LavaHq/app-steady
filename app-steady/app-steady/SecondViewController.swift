@@ -29,6 +29,7 @@ class SecondViewController: UIViewController {
         self.view.addSubview(lineChart)
     }
     
+    // The Chart is consuming the data incorrectly. We should create many different lines on the chart, one for each question
     func setChart(dataPoints: [String], values: [Double]){
         
         var dataEntries: [ChartDataEntry] = []

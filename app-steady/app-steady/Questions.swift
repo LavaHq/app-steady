@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Maybe we should have the alamofire module initialize the questions in here? The request should create the questions and populate the questionsList
 struct Question {
     var askQuestion: String
 }
