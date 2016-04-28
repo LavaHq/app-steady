@@ -12,28 +12,58 @@ import Alamofire
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
-    
+    var questionList:[Question] = []
+
     var answerPicker = UIPickerView(frame: CGRectMake(100, 400, 200, 100))
     var questionLabel = UILabel(frame: CGRectMake(100, 100, 200, 21))
     var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
     let nextQuestionButton = UIButton(type: UIButtonType.System)
     
-    var mainQuestion = nextQuestion()
-    
+    var mainQuestionIndex = 0
+    var mainQuestion : Question = Question(text: "", id: 0)
     let pickerData = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.initializeAlamofire()
-        self.initializeQuestionLabel()
-        self.initializeAnswerPicker()
-        self.initializeNextQuestionButton()
+    }
+    
+    func initializeAlamofire() {
+        Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
+            
+            let results :NSArray = response.result.value!["results"] as! NSArray
+            let firstResult = results[0]
+            let text = firstResult["text"]
+            let id = firstResult["id"]
+            print(text)
+            print(id)
+
+            response.result.value
+            self.initializeQuestionArray(results)
+            self.initializeQuestionLabel()
+            self.initializeAnswerPicker()
+            self.initializeNextQuestionButton()
+        }
+    }
+    
+    func initializeQuestionArray(results :NSArray)
+    {
+        for result in results{
+            let text: String = result["text"] as! String
+            let id: NSInteger = result["id"] as! NSInteger
+            let question = Question(text: text, id: id)
+            questionList.append(question)
+            print("success!")
+        }
+        
     }
     
     func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
-        questionLabel.text = mainQuestion!.askQuestion
+//        questionLabel.text = mainQuestion!.askQuestion
+        
+        questionLabel.text = nextQuestion()?.text
         self.view.addSubview(questionLabel)
     }
     
@@ -56,24 +86,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         answerPicker.delegate = self
     }
     
-    func initializeAlamofire() {
-        Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
-
-            print(response.request)  // original URL request
-            print(response.response) // URL response
-            print(response.data)     // server data
-            print(response.result)   // result of response serialization
-            
-            
-             response.result.value
-            if let JSON = response.result.value {
-                print("JSON: \(JSON)")
-                // Have the
-            }
-            
-        }
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -81,15 +93,27 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     }
     
     func nextQuestionButtonPressed(sender: UIButton!) {
-        mainQuestion = nextQuestion()
-        if (mainQuestion == nil)  {
+        if (mainQuestionIndex == questionList.count)  {
             tabBarController?.selectedIndex = 1
             return
         }
         
-        self.questionLabel.text = mainQuestion!.askQuestion
+        
+        
+//        self.questionLabel.text = mainQuestion!.askQuestion
         self.answerLabel.hidden = true
         print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
+    }
+    
+    func nextQuestion() -> Question? {
+        
+        if questionIndex == questionList.count{
+            return nil
+        }
+        
+        let question: Question = questionList[questionIndex] 
+        questionIndex += 1
+        return question
     }
     
     //MARK: - Delegates and data sources

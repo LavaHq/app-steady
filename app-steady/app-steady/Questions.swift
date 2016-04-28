@@ -7,33 +7,17 @@
 //
 
 import Foundation
+import Alamofire
 
 // Maybe we should have the alamofire module initialize the questions in here? The request should create the questions and populate the questionsList
-struct Question {
-    var askQuestion: String
-}
+//struct Question {
+//    var askQuestion: String
+//}
 
 //List of questions
-let q1 = Question(askQuestion: "Did you do your best to be happy?")
-let q2 = Question(askQuestion: "Did you do your best to find meaning?")
-let q3 = Question(askQuestion: "Did you do your best to set clear goals?")
-let q4 = Question(askQuestion: "Did you do your best to reach your goals?")
-let q5 = Question(askQuestion: "Did you do your best to build positive relationships?")
-let q6 = Question(askQuestion: "Did you do your best to be fully engaged?")
-let q7 = Question(askQuestion: "Did you do your best to eat healthy?")
-let q8 = Question(askQuestion: "Did you do your best to keep a good posture?")
-let q9 = Question(askQuestion: "Did you do your best to get a good night's sleep?")
-let q0 = Question(askQuestion: "Did you do your best to work on programming?")
-
-let questionsList = [q1, q2, q3, q4, q5, q6, q7, q8, q9, q0]
 
 var questionIndex = 0
 
-func nextQuestion() -> Question? {
-    if questionIndex == questionsList.count{
-        return nil
-    }
-        let question = questionsList[questionIndex]
-        questionIndex += 1
-        return question
-}
+
+
+
