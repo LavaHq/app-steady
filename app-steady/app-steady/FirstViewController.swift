@@ -11,21 +11,19 @@ import Alamofire
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
-    let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
     var questionList:[Question] = []
-
     var answerPicker = UIPickerView(frame: CGRectMake(100, 400, 200, 100))
     var questionLabel = UILabel(frame: CGRectMake(100, 100, 200, 21))
     var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
-    let nextQuestionButton = UIButton(type: UIButtonType.System)
-    
     var mainQuestionIndex = 0
     var mainQuestion : Question = Question(text: "", id: 0)
+    
+    let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+    let nextQuestionButton = UIButton(type: UIButtonType.System)
     let pickerData = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         self.initializeAlamofire()
     }
     
@@ -33,13 +31,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
             
             let results :NSArray = response.result.value!["results"] as! NSArray
-            let firstResult = results[0]
-            let text = firstResult["text"]
-            let id = firstResult["id"]
-            print(text)
-            print(id)
 
-            response.result.value
             self.initializeQuestionArray(results)
             self.initializeQuestionLabel()
             self.initializeAnswerPicker()
@@ -47,22 +39,17 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         }
     }
     
-    func initializeQuestionArray(results :NSArray)
-    {
+    func initializeQuestionArray(results :NSArray){
         for result in results{
             let text: String = result["text"] as! String
             let id: NSInteger = result["id"] as! NSInteger
             let question = Question(text: text, id: id)
             questionList.append(question)
-            print("success!")
         }
-        
     }
     
     func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
-//        questionLabel.text = mainQuestion!.askQuestion
-        
         questionLabel.text = nextQuestion()?.text
         self.view.addSubview(questionLabel)
     }
@@ -86,34 +73,29 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         answerPicker.delegate = self
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func nextQuestionButtonPressed(sender: UIButton!) {
         if (mainQuestionIndex == questionList.count)  {
             tabBarController?.selectedIndex = 1
             return
         }
-        
-        
-        
-//        self.questionLabel.text = mainQuestion!.askQuestion
+        self.questionLabel.text = nextQuestion()?.text
         self.answerLabel.hidden = true
+
         print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
     }
     
     func nextQuestion() -> Question? {
         
-        if questionIndex == questionList.count{
+        if mainQuestionIndex == questionList.count{
             return nil
         }
-        
-        let question: Question = questionList[questionIndex] 
-        questionIndex += 1
+        let question: Question = questionList[mainQuestionIndex]
+        mainQuestionIndex += 1
         return question
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     //MARK: - Delegates and data sources
@@ -129,7 +111,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
-    
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         answerLabel.text = pickerData[row]
         answerLabel.hidden = false

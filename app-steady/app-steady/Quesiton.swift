@@ -14,12 +14,8 @@ class Question : NSObject {
     
     init(text: String, id: NSInteger) {
         super.init()
-
         self.text = text
         self.id = id
-        
-        print(self.text)
-
     }
 }
 

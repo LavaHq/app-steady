@@ -16,7 +16,6 @@
 		499182081CB5C7A400109052 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499182061CB5C7A400109052 /* LaunchScreen.storyboard */; };
 		499182131CB5C7A400109052 /* app_steadyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499182121CB5C7A400109052 /* app_steadyTests.swift */; };
 		4991821E1CB5C7A400109052 /* app_steadyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991821D1CB5C7A400109052 /* app_steadyUITests.swift */; };
-		4991822C1CB5DB1700109052 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4991822B1CB5DB1700109052 /* Questions.swift */; };
 		92358DF2DEDC4F3142A43F6F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8A682C002B9DB176453F9E9 /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +65,6 @@
 		499182191CB5C7A400109052 /* app-steadyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "app-steadyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4991821D1CB5C7A400109052 /* app_steadyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = app_steadyUITests.swift; sourceTree = "<group>"; };
 		4991821F1CB5C7A400109052 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4991822B1CB5DB1700109052 /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
 		7A70F61C9D60AF3F2F5226EA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BDD2F7E42C8FBC4AAA73FE44 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		C8A682C002B9DB176453F9E9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,12 +124,11 @@
 				499181FB1CB5C7A400109052 /* AppDelegate.swift */,
 				499181FD1CB5C7A400109052 /* FirstViewController.swift */,
 				499181FF1CB5C7A400109052 /* SecondViewController.swift */,
+				1AC1342F1CD26E0600D70306 /* Quesiton.swift */,
 				499182011CB5C7A400109052 /* Main.storyboard */,
 				499182041CB5C7A400109052 /* Assets.xcassets */,
 				499182061CB5C7A400109052 /* LaunchScreen.storyboard */,
 				499182091CB5C7A400109052 /* Info.plist */,
-				4991822B1CB5DB1700109052 /* Questions.swift */,
-				1AC1342F1CD26E0600D70306 /* Quesiton.swift */,
 			);
 			path = "app-steady";
 			sourceTree = "<group>";
@@ -356,7 +353,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				499182001CB5C7A400109052 /* SecondViewController.swift in Sources */,
-				4991822C1CB5DB1700109052 /* Questions.swift in Sources */,
 				1AC134301CD26E0600D70306 /* Quesiton.swift in Sources */,
 				499181FC1CB5C7A400109052 /* AppDelegate.swift in Sources */,
 				499181FE1CB5C7A400109052 /* FirstViewController.swift in Sources */,
