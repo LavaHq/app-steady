@@ -13,10 +13,9 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     var questionList:[Question] = []
     var answerPicker = UIPickerView(frame: CGRectMake(100, 400, 200, 100))
-    var questionLabel = UILabel(frame: CGRectMake(100, 100, 200, 21))
+    var questionLabel = UILabel(frame: CGRectMake(0, 100, 400, 21))
     var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
     var mainQuestionIndex = 0
-    var mainQuestion : Question = Question(text: "", id: 0)
     
     let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
     let nextQuestionButton = UIButton(type: UIButtonType.System)
