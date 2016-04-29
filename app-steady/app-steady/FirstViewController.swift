@@ -12,10 +12,11 @@ import Alamofire
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     var questionList:[Question] = []
-    var answerPicker = UIPickerView(frame: CGRectMake(100, 400, 200, 100))
-    var questionLabel = UILabel(frame: CGRectMake(0, 100, 400, 21))
+    var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
+    var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 21))
     var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
     var mainQuestionIndex = 0
+    var scoresheet = Scoresheet(entries: [])
     
     let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
     let nextQuestionButton = UIButton(type: UIButtonType.System)
@@ -26,9 +27,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.initializeAlamofire()
     }
     
-    func postScoresheet() {
-        
-    }
+
     
     func initializeAlamofire() {
         Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
@@ -53,7 +52,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
-        questionLabel.text = nextQuestion()?.text
+        questionLabel.updateQuestion(questionList[0])
         self.view.addSubview(questionLabel)
     }
     
@@ -65,7 +64,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func initializeNextQuestionButton () {
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
-        nextQuestionButton.frame = CGRectMake(100, 600, 200, 21)
+        nextQuestionButton.frame = CGRectMake(100, 500, 200, 21)
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(nextQuestionButton)
     }
@@ -76,22 +75,30 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         answerPicker.delegate = self
     }
     
-    func nextQuestionButtonPressed(sender: UIButton!) {
-        if (mainQuestionIndex == questionList.count)  {
-            tabBarController?.selectedIndex = 1
-            return
-        }
+    func nextQuestionButtonPressed(sender: UIButton!) {        
+        print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
+        
+        
         self.questionLabel.text = nextQuestion()?.text
         self.answerLabel.hidden = true
+        let score: NSInteger? = Int(self.answerLabel.text!)
+        
+        let entry = Entry(question: self.questionLabel.question, score: score!)
+        scoresheet.entries.append(entry)
+        
+        if (mainQuestionIndex == questionList.count)  {
+            segueToChart()
+            return
+        }
 
-        print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
+    }
+    
+    func segueToChart()
+    {
+        tabBarController?.selectedIndex = 1
     }
     
     func nextQuestion() -> Question? {
-        
-        if mainQuestionIndex == questionList.count{
-            return nil
-        }
         let question: Question = questionList[mainQuestionIndex]
         mainQuestionIndex += 1
         return question
