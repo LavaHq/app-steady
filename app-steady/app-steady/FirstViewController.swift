@@ -26,6 +26,10 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.initializeAlamofire()
     }
     
+    func postScoresheet() {
+        
+    }
+    
     func initializeAlamofire() {
         Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
             
