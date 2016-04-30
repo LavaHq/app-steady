@@ -112,7 +112,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
                 
-                let response = JSON as! NSDictionary
+                let _ = JSON as! NSDictionary
                 
                 //example if there is an id
 //                let userId = response.objectForKey("id")!
