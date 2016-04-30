@@ -11,6 +11,9 @@ import Alamofire
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
+    let API_URI = "http://localhost:8000"
+    
+    
     var questionList:[Question] = []
     var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
     var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 21))
@@ -27,10 +30,8 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.initializeAlamofire()
     }
     
-
-    
     func initializeAlamofire() {
-        Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
+        Alamofire.request(.GET, API_URI + "/prompts") .responseJSON { response in // 1
             
             let results :NSArray = response.result.value!["results"] as! NSArray
 
@@ -75,21 +76,24 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         answerPicker.delegate = self
     }
     
-    func nextQuestionButtonPressed(sender: UIButton!) {        
+    func nextQuestionButtonPressed(sender: UIButton!) {
         print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
         
-        
-        self.questionLabel.text = nextQuestion()?.text
-        self.answerLabel.hidden = true
+
         let score: NSInteger? = Int(self.answerLabel.text!)
-        
-        let entry = Entry(question: self.questionLabel.question, score: score!)
+        let entry = Entry(question: questionList[mainQuestionIndex], score: score!)
         scoresheet.entries.append(entry)
+
+        mainQuestionIndex += 1
         
         if (mainQuestionIndex == questionList.count)  {
+            postScoresheet()
             segueToChart()
             return
         }
+        
+        self.questionLabel.updateQuestion(questionList[mainQuestionIndex])
+        self.answerLabel.hidden = true
 
     }
     
@@ -97,13 +101,33 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     {
         tabBarController?.selectedIndex = 1
     }
-    
-    func nextQuestion() -> Question? {
-        let question: Question = questionList[mainQuestionIndex]
-        mainQuestionIndex += 1
-        return question
-    }
 
+
+    func postScoresheet()
+    {
+        let params = scoresheet.toDict()
+        
+        Alamofire.request(.POST, API_URI + "/scoresheets", parameters: params as? [String : AnyObject], encoding: .JSON).responseJSON
+            { response in switch response.result {
+            case .Success(let JSON):
+                print("Success with JSON: \(JSON)")
+                
+                let response = JSON as! NSDictionary
+                
+                //example if there is an id
+//                let userId = response.objectForKey("id")!
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                }
+        }
+
+        
+        
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

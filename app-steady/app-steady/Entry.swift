@@ -18,4 +18,13 @@ class Entry: NSObject {
         self.score = score
         self.question = question
     }
+    
+    func toDict() -> NSDictionary
+    {
+        return [
+            "score": score,
+            "question": question.id
+        ]
+    }
+    
 }

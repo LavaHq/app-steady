@@ -16,4 +16,19 @@ class Scoresheet: NSObject {
         self.entries = entries
         self.id = id
     }
+    
+    func toDict() -> NSDictionary
+    {
+
+        var dictEntryList : [NSDictionary] = []
+        
+        for entry in entries
+        {
+            dictEntryList.append(entry.toDict())
+        }
+        
+        let dict = ["entries" : dictEntryList, "label": "PLACEHOLDER"]
+        
+        return dict
+    }
 }
