@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AC134301CD26E0600D70306 /* Quesiton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC1342F1CD26E0600D70306 /* Quesiton.swift */; };
+		1AC134321CD4198F00D70306 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134311CD4198F00D70306 /* Entry.swift */; };
+		1AC134341CD4199A00D70306 /* Scoresheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134331CD4199A00D70306 /* Scoresheet.swift */; };
+		1AC134371CD41D0D00D70306 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134361CD41D0D00D70306 /* Question.swift */; };
+		1AC134391CD41EBB00D70306 /* QuestionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134381CD41EBB00D70306 /* QuestionLabel.swift */; };
 		499181FC1CB5C7A400109052 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499181FB1CB5C7A400109052 /* AppDelegate.swift */; };
 		499181FE1CB5C7A400109052 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499181FD1CB5C7A400109052 /* FirstViewController.swift */; };
 		499182001CB5C7A400109052 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499181FF1CB5C7A400109052 /* SecondViewController.swift */; };
@@ -50,7 +53,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1AC1342F1CD26E0600D70306 /* Quesiton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quesiton.swift; sourceTree = "<group>"; };
+		1AC134311CD4198F00D70306 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		1AC134331CD4199A00D70306 /* Scoresheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoresheet.swift; sourceTree = "<group>"; };
+		1AC134361CD41D0D00D70306 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		1AC134381CD41EBB00D70306 /* QuestionLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionLabel.swift; sourceTree = "<group>"; };
 		499181F81CB5C7A400109052 /* app-steady.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "app-steady.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		499181FB1CB5C7A400109052 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		499181FD1CB5C7A400109052 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +102,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AC134351CD419CF00D70306 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1AC134361CD41D0D00D70306 /* Question.swift */,
+				1AC134311CD4198F00D70306 /* Entry.swift */,
+				1AC134331CD4199A00D70306 /* Scoresheet.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		499181EF1CB5C7A400109052 = {
 			isa = PBXGroup;
 			children = (
@@ -121,14 +137,15 @@
 		499181FA1CB5C7A400109052 /* app-steady */ = {
 			isa = PBXGroup;
 			children = (
+				1AC134351CD419CF00D70306 /* Models */,
 				499181FB1CB5C7A400109052 /* AppDelegate.swift */,
 				499181FD1CB5C7A400109052 /* FirstViewController.swift */,
 				499181FF1CB5C7A400109052 /* SecondViewController.swift */,
-				1AC1342F1CD26E0600D70306 /* Quesiton.swift */,
 				499182011CB5C7A400109052 /* Main.storyboard */,
 				499182041CB5C7A400109052 /* Assets.xcassets */,
 				499182061CB5C7A400109052 /* LaunchScreen.storyboard */,
 				499182091CB5C7A400109052 /* Info.plist */,
+				1AC134381CD41EBB00D70306 /* QuestionLabel.swift */,
 			);
 			path = "app-steady";
 			sourceTree = "<group>";
@@ -352,9 +369,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC134341CD4199A00D70306 /* Scoresheet.swift in Sources */,
+				1AC134321CD4198F00D70306 /* Entry.swift in Sources */,
+				1AC134391CD41EBB00D70306 /* QuestionLabel.swift in Sources */,
 				499182001CB5C7A400109052 /* SecondViewController.swift in Sources */,
-				1AC134301CD26E0600D70306 /* Quesiton.swift in Sources */,
 				499181FC1CB5C7A400109052 /* AppDelegate.swift in Sources */,
+				1AC134371CD41D0D00D70306 /* Question.swift in Sources */,
 				499181FE1CB5C7A400109052 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

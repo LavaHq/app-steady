@@ -1,12 +1,23 @@
+//
+//  Quesiton.swift
+//  app-steady
+//
+//  Created by Daniel.Habib on 4/28/16.
+//  Copyright © 2016 Hawt-Lava. All rights reserved.
+//
+
+import UIKit
+
 class Question : NSObject {
     var text : String = ""
-
-    init(JSONString: String) {
-        super.init()
-        var error : NSError?
-        let JSONData = JSONString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
-        let JSONDictionary: Dictionary = NSJSONSerialization.JSONObjectWithData(JSONData, options: nil, error: &error) as NSDictionary
+    var id : NSInteger = 0
     
-        self.setValuesForKeysWithDictionary(JSONDictionary)
+    init(text: String, id: NSInteger) {
+        super.init()
+        self.text = text
+        self.id = id
     }
 }
+
+
+

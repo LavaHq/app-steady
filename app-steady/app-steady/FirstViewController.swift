@@ -11,11 +11,15 @@ import Alamofire
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
+    let API_URI = "http://localhost:8000"
+    
+    
     var questionList:[Question] = []
-    var answerPicker = UIPickerView(frame: CGRectMake(100, 400, 200, 100))
-    var questionLabel = UILabel(frame: CGRectMake(0, 100, 400, 21))
+    var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
+    var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 21))
     var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
     var mainQuestionIndex = 0
+    var scoresheet = Scoresheet(entries: [])
     
     let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
     let nextQuestionButton = UIButton(type: UIButtonType.System)
@@ -27,7 +31,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     }
     
     func initializeAlamofire() {
-        Alamofire.request(.GET, "http://localhost:8000/prompts") .responseJSON { response in // 1
+        Alamofire.request(.GET, API_URI + "/prompts") .responseJSON { response in // 1
             
             let results :NSArray = response.result.value!["results"] as! NSArray
 
@@ -49,7 +53,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
-        questionLabel.text = nextQuestion()?.text
+        questionLabel.updateQuestion(questionList[0])
         self.view.addSubview(questionLabel)
     }
     
@@ -61,7 +65,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func initializeNextQuestionButton () {
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
-        nextQuestionButton.frame = CGRectMake(100, 600, 200, 21)
+        nextQuestionButton.frame = CGRectMake(100, 500, 200, 21)
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(nextQuestionButton)
     }
@@ -73,26 +77,57 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     }
     
     func nextQuestionButtonPressed(sender: UIButton!) {
+        print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
+        
+
+        let score: NSInteger? = Int(self.answerLabel.text!)
+        let entry = Entry(question: questionList[mainQuestionIndex], score: score!)
+        scoresheet.entries.append(entry)
+
+        mainQuestionIndex += 1
+        
         if (mainQuestionIndex == questionList.count)  {
-            tabBarController?.selectedIndex = 1
+            postScoresheet()
+            segueToChart()
             return
         }
-        self.questionLabel.text = nextQuestion()?.text
+        
+        self.questionLabel.updateQuestion(questionList[mainQuestionIndex])
         self.answerLabel.hidden = true
 
-        print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
     }
     
-    func nextQuestion() -> Question? {
-        
-        if mainQuestionIndex == questionList.count{
-            return nil
-        }
-        let question: Question = questionList[mainQuestionIndex]
-        mainQuestionIndex += 1
-        return question
+    func segueToChart()
+    {
+        tabBarController?.selectedIndex = 1
     }
 
+
+    func postScoresheet()
+    {
+        let params = scoresheet.toDict()
+        
+        Alamofire.request(.POST, API_URI + "/scoresheets", parameters: params as? [String : AnyObject], encoding: .JSON).responseJSON
+            { response in switch response.result {
+            case .Success(let JSON):
+                print("Success with JSON: \(JSON)")
+                
+                let response = JSON as! NSDictionary
+                
+                //example if there is an id
+//                let userId = response.objectForKey("id")!
+                
+            case .Failure(let error):
+                print("Request failed with error: \(error)")
+                }
+        }
+
+        
+        
+        
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
