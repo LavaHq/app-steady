@@ -27,6 +27,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarController?.tabBar.hidden = true 
         self.initializeAlamofire()
     }
     
