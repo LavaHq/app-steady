@@ -8,11 +8,15 @@
 
 import XCTest
 
+
+@testable import app_steady
+
 class FirstControllerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.faker = Faker(locale: "nb-NO")
         
     }
     
@@ -24,6 +28,15 @@ class FirstControllerTests: XCTestCase {
     func testBuildQuestions() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let fcv = FirstViewController()
+        
+        let questions = [
+            [
+                "FOO": "BAR"
+            ]
+        ]
+        
+        fcv.buildQuestions(questions)
     
     }
     

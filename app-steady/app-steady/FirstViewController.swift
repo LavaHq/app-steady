@@ -29,7 +29,21 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         SteadyAPI.GET("/prompts", successCallback: initializeUIComponents)
     }
     
-
+    /**
+     * - Parameters:
+     *   - NSArray: The Results from querying the API
+     * - Returns: A list of Question Objects That will be passed to the user
+     */
+    func buildQuestions(results :NSArray) -> [Question]{
+        var  questions: [Question] = []
+        for result in results{
+            let question = Question.deserializeQuestion(result as! NSDictionary)
+            questions.append(question)
+        }
+        return questions
+    }
+    
+    //MARK: - UIComponent Customization
     func initializeUIComponents(results: NSArray)
     {
         questionList = self.buildQuestions(results)
@@ -39,18 +53,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         
     }
     
-    func buildQuestions(results :NSArray) -> [Question]{
-        var  questions: [Question] = []
-        for result in results{
-            let text: String = result["text"] as! String
-            let id: NSInteger = result["id"] as! NSInteger
-            let question = Question(text: text, id: id)
-            questions.append(question)
-        }
-        return questions
-    }
-    
-    //MARK: - UIComponent Customization
     func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
         questionLabel.updateQuestion(questionList[0])
