@@ -11,8 +11,6 @@ import Alamofire
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
-    let API_URI = "http://localhost:8000"
-    
     
     var questionList:[Question] = []
     var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
@@ -28,30 +26,31 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.hidden = true 
-        self.initializeAlamofire()
+        SteadyAPI.GET("/prompts", successCallback: initializeUIComponents)
     }
     
-    func initializeAlamofire() {
-        Alamofire.request(.GET, API_URI + "/prompts") .responseJSON { response in // 1
-            
-            let results :NSArray = response.result.value!["results"] as! NSArray
 
-            self.initializeQuestionArray(results)
-            self.initializeQuestionLabel()
-            self.initializeAnswerPicker()
-            self.initializeNextQuestionButton()
-        }
+    func initializeUIComponents(results: NSArray)
+    {
+        questionList = self.buildQuestions(results)
+        self.initializeQuestionLabel()
+        self.initializeAnswerPicker()
+        self.initializeNextQuestionButton()
+        
     }
     
-    func initializeQuestionArray(results :NSArray){
+    func buildQuestions(results :NSArray) -> [Question]{
+        var  questions: [Question] = []
         for result in results{
             let text: String = result["text"] as! String
             let id: NSInteger = result["id"] as! NSInteger
             let question = Question(text: text, id: id)
-            questionList.append(question)
+            questions.append(question)
         }
+        return questions
     }
     
+    //MARK: - UIComponent Customization
     func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
         questionLabel.updateQuestion(questionList[0])
@@ -88,8 +87,13 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         mainQuestionIndex += 1
         
         if (mainQuestionIndex == questionList.count)  {
-            postScoresheet()
+            let params = scoresheet.toDict()
+            SteadyAPI.POST(ENDPOINT_SCORESHEETS,
+                           params: params,
+                           successCallback: nil,
+                           failureCallback: nil)
             segueToChart()
+            
             return
         }
         
@@ -102,32 +106,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     {
         tabBarController?.selectedIndex = 1
     }
-
-
-    func postScoresheet()
-    {
-        let params = scoresheet.toDict()
-        
-        Alamofire.request(.POST, API_URI + "/scoresheets", parameters: params as? [String : AnyObject], encoding: .JSON).responseJSON
-            { response in switch response.result {
-            case .Success(let JSON):
-                print("Success with JSON: \(JSON)")
-                
-                let _ = JSON as! NSDictionary
-                
-                //example if there is an id
-//                let userId = response.objectForKey("id")!
-                
-            case .Failure(let error):
-                print("Request failed with error: \(error)")
-                }
-        }
-
-        
-        
-        
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
