@@ -26,7 +26,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBarController?.tabBar.hidden = true 
-        SteadyAPI.GET("/prompts", successCallback: initializeUIComponents)
+        SteadyAPI.GET(ENDPOINT_PROMPTS, successCallback: initializeUIComponents, failureCallback: nil)
     }
     
     /**

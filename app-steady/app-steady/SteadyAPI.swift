@@ -1,6 +1,6 @@
 //
 //  SteadyAPI.swift
-//  
+//
 //
 //  Created by Daniel.Habib on 5/2/16.
 //
@@ -17,13 +17,24 @@ let ENDPOINT_SCORESHEETS = "scoresheets/"
 class SteadyAPI: NSObject {
     
     
-    static func GET(endpoint: String, successCallback: (NSArray) -> Void){
+    static func GET(endpoint: String, successCallback: ((NSArray) -> Void)?, failureCallback: ((NSError) -> Void)?){
         
-        Alamofire.request(.GET, API_URI + endpoint) .responseJSON { response in // 1
-    
+        Alamofire.request(.GET, API_URI + endpoint) .responseJSON { response in switch response.result{
+        case.Success(_):
+            
             let results :NSArray = response.result.value!["results"] as! NSArray
-    
-            successCallback(results)
+            
+            if (successCallback != nil)
+            {
+                successCallback!(results)
+            }
+            
+        case.Failure(let error):
+            print("Request failed with error: \(error)")
+            if (failureCallback != nil){
+                failureCallback!(error)
+            }
+            }
         }
     }
     
@@ -41,13 +52,13 @@ class SteadyAPI: NSObject {
                 }
                 
                 //example if there is an id
-                //                let userId = response.objectForKey("id")!
+            //                let userId = response.objectForKey("id")!
             case .Failure(let error):
                 print("Request failed with error: \(error)")
                 if (failureCallback != nil){
                     failureCallback!(error)
                 }
-            }
+                }
         }
     }
 }
