@@ -17,6 +17,12 @@ class Question : NSObject {
         self.text = text
         self.id = id
     }
+    
+    static func deserializeQuestion(dict: NSDictionary) -> Question{
+        let text: String = dict["text"] as! String
+        let id: NSInteger = dict["id"] as! NSInteger
+        return Question(text: text, id: id)
+    }
 }
 
 
