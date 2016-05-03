@@ -30,9 +30,11 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     }
     
     /**
+     * Converts the list of questions from the api into a collection of Question objects
+     *
      * - Parameters:
      *   - NSArray: The Results from querying the API
-     * - Returns: A list of Question Objects That will be passed to the user
+     * - Returns: A list of Question Objects That will be presented
      */
     func buildQuestions(results :NSArray) -> [Question]{
         var  questions: [Question] = []
@@ -78,12 +80,18 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         answerPicker.delegate = self
     }
     
+    /**
+     * When the Submit Button is pressed, present the next question. If we are out of questions, segue to the next controller
+     *
+     * - Parameters:
+     *   - UIButton: The Button that is pressed
+     */
     func nextQuestionButtonPressed(sender: UIButton!) {
         print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
         
-
         let score: NSInteger? = Int(self.answerLabel.text!)
         let entry = Entry(question: questionList[mainQuestionIndex], score: score!)
+        
         scoresheet.entries.append(entry)
 
         mainQuestionIndex += 1

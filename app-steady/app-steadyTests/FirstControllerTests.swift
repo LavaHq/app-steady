@@ -31,17 +31,20 @@ class FirstControllerTests: XCTestCase {
         let fcv = FirstViewController()
         
         let questions = [
-            [
-                "id": 1,
-                "text": "BAR"
-            ]
+            QuestionStub.generateStub()
         ]
         
         let result = fcv.buildQuestions(questions)
-        XCTAssertEqual(result[0].text, questions[0]["text"])
-        XCTAssertEqual(result[0].id, questions[0]["id"])
-    
+        XCTAssertEqual(result[0].text, questions[0]["text"] as? String)
+        XCTAssertEqual(result[0].id, questions[0]["id"] as? Int)
     }
+//TODO: Implemet Tests for Next Button
+//    func testNextButtonPressed() {
+//        let fcv = FirstViewController()
+//        fcv.
+//        fcv.nextQuestionButtonPressed(UIButton())
+//        
+//    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

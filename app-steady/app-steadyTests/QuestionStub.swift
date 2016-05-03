@@ -10,10 +10,12 @@ import UIKit
 
 class QuestionStub: NSObject {
 
-    static func generateStub()
+    static func generateStub() -> NSDictionary
     {
-        return
+        return [
+            "text": "foo",
+            "id": 1
+        ]
     }
-    
 }
 
