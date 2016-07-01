@@ -24,6 +24,9 @@ class SecondViewController: UIViewController {
     
     func initializeLineChart(){
         days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
+        let scores = SteadyAPI.GET(ENDPOINT_PROMPTS, successCallback: nil, failureCallback: nil)
+        print(scores)
+        
         let rank = [4.0, 6.0, 8.0, 7.0, 10.0, 10.0, 8.0]
         setChart(days, values: rank)
         self.view.addSubview(lineChart)

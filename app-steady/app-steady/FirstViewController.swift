@@ -15,7 +15,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     var questionList:[Question] = []
     var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
     var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 21))
-    var answerLabel = UILabel(frame: CGRectMake(100, 200, 200, 21))
+    var answerData = 0
     var mainQuestionIndex = 0
     var scoresheet = Scoresheet(entries: [])
     
@@ -61,12 +61,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.view.addSubview(questionLabel)
     }
     
-    func initializeAnswerLabel() {
-        answerLabel.textAlignment = NSTextAlignment.Center
-        answerLabel.hidden = true
-        self.view.addSubview(answerLabel)
-    }
-    
     func initializeNextQuestionButton () {
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
         nextQuestionButton.frame = CGRectMake(100, 500, 200, 21)
@@ -87,9 +81,9 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
      *   - UIButton: The Button that is pressed
      */
     func nextQuestionButtonPressed(sender: UIButton!) {
-        print(self.UUID, self.questionLabel.text!, self.answerLabel.text!)
+        print(self.UUID, self.questionLabel.text!, self.answerData)
         
-        let score: NSInteger? = Int(self.answerLabel.text!)
+        let score: NSInteger? = self.answerData
         let entry = Entry(question: questionList[mainQuestionIndex], score: score!)
         
         scoresheet.entries.append(entry)
@@ -98,6 +92,8 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         
         if (mainQuestionIndex == questionList.count)  {
             let params = scoresheet.toDict()
+            print("Params are...")
+            print(params)
             SteadyAPI.POST(ENDPOINT_SCORESHEETS,
                            params: params,
                            successCallback: nil,
@@ -108,7 +104,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         }
         
         self.questionLabel.updateQuestion(questionList[mainQuestionIndex])
-        self.answerLabel.hidden = true
 
     }
     
@@ -135,8 +130,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         return pickerData[row]
     }
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        answerLabel.text = pickerData[row]
-        answerLabel.hidden = false
+        answerData = Int(pickerData[row])!
     }
 }
 
