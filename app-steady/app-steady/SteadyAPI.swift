@@ -50,15 +50,12 @@ class SteadyAPI: NSObject {
                 {
                     successCallback!(result)
                 }
-                
-                //example if there is an id
-            //                let userId = response.objectForKey("id")!
             case .Failure(let error):
                 print("Request failed with error: \(error)")
                 if (failureCallback != nil){
                     failureCallback!(error)
                 }
-                }
+            }
         }
     }
 }
