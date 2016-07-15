@@ -16,8 +16,8 @@ let ENDPOINT_SCORESHEETS = "/scoresheets"
 
 class SteadyAPI: NSObject {
     
-    static func generateUrlForPromptsWithUser(userID: userId -> String) {
-        return API_URI.append(ENDPOINT_PROMPTS).append("?userId=".append(userID))
+    static func generateUrlForPromptsWithUser(userID: Int) -> String {
+        return "\(API_URI)\(ENDPOINT_PROMPTS)?userId=\(userID)"
     }
     
     static func GET(endpoint: String, successCallback: ((NSArray) -> Void)?, failureCallback: ((NSError) -> Void)?){

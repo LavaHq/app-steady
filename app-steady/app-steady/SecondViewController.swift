@@ -22,20 +22,21 @@ class SecondViewController: UIViewController {
         self.initializeLineChart()
     }
     
-    func chartSuccessfulCallback(_: result) {
-        data = result.data
-        values = data.prompts
+    func chartSuccessfulCallback(result: Dictionary<String, String>) {
+//        var data = result['data']
+//        var values = data.prompts
     }
     
     func initializeLineChart(){
         // userId = NSUserDefaults
+        //_ = 1
         days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
-        let scores = SteadyAPI.GET(
-            SteadyAPI.generateUrlForPromptsWithUser(userId),
-            successCallback: chartSuccessfulCallback,
-            failureCallback: nil)
+//        let scores = SteadyAPI.GET(
+//            SteadyAPI.generateUrlForPromptsWithUser(userId),
+//            successCallback: chartSuccessfulCallback,
+//            failureCallback: nil)
         
-        print(scores) // Use The Sucecssful Call Backs in SteadyApi.GET to correctly access the values
+//        print(scores) // Use The Sucecssful Call Backs in SteadyApi.GET to correctly access the values
         
         let rank = [4.0, 6.0, 8.0, 7.0, 10.0, 10.0, 8.0]
         
