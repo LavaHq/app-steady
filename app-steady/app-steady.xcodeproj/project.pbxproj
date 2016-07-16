@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		113BFE6A631CF6B4710FCDF3 /* Pods_app_steadyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621D76E262E832D25A8BC04B /* Pods_app_steadyTests.framework */; };
+		1AB9BAEB1D39AB94006A14A2 /* GraphicalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9BAEA1D39AB94006A14A2 /* GraphicalTableViewCell.swift */; };
 		1AC134321CD4198F00D70306 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134311CD4198F00D70306 /* Entry.swift */; };
 		1AC134341CD4199A00D70306 /* Scoresheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134331CD4199A00D70306 /* Scoresheet.swift */; };
 		1AC134371CD41D0D00D70306 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134361CD41D0D00D70306 /* Question.swift */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AB9BAEA1D39AB94006A14A2 /* GraphicalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicalTableViewCell.swift; sourceTree = "<group>"; };
 		1AC134311CD4198F00D70306 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		1AC134331CD4199A00D70306 /* Scoresheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoresheet.swift; sourceTree = "<group>"; };
 		1AC134361CD41D0D00D70306 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				1AC134381CD41EBB00D70306 /* QuestionLabel.swift */,
+				1AB9BAEA1D39AB94006A14A2 /* GraphicalTableViewCell.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				499182001CB5C7A400109052 /* SecondViewController.swift in Sources */,
 				499181FC1CB5C7A400109052 /* AppDelegate.swift in Sources */,
 				1AC134371CD41D0D00D70306 /* Question.swift in Sources */,
+				1AB9BAEB1D39AB94006A14A2 /* GraphicalTableViewCell.swift in Sources */,
 				1AC1343F1CD7732100D70306 /* SteadyAPI.swift in Sources */,
 				499181FE1CB5C7A400109052 /* FirstViewController.swift in Sources */,
 			);
