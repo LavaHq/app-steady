@@ -9,32 +9,35 @@
 import UIKit
 import Charts
 
-class SecondViewController: UIViewController {
+class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var lineChart = LineChartView(frame: CGRectMake(100, 100, 400, 400))
     
     var days: [String]!
+    
+    var tableView: UITableView  =   UITableView()
+    
+    var items: [String] = ["Viper", "X", "Games"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.initializeTableView()
         self.initializeLineChart()
     }
     
-    func chartSuccessfulCallback(result: Dictionary<String, String>) {
-//        var data = result['data']
-//        var values = data.prompts
+    func initializeTableView(){
+        tableView.frame         =   CGRectMake(0, 50, 320, 200);
+        tableView.delegate      =   self
+        tableView.dataSource    =   self
+        
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        self.view.addSubview(tableView)
     }
     
     func initializeLineChart(){
-        // userId = NSUserDefaults
-        //_ = 1
         days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
-//        let scores = SteadyAPI.GET(
-//            SteadyAPI.generateUrlForPromptsWithUser(userId),
-//            successCallback: chartSuccessfulCallback,
-//            failureCallback: nil)
         
 //        print(scores) // Use The Sucecssful Call Backs in SteadyApi.GET to correctly access the values
         
@@ -42,6 +45,24 @@ class SecondViewController: UIViewController {
         
         setChart(days, values: rank)
         self.view.addSubview(lineChart)
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        
+        cell.textLabel?.text = self.items[indexPath.row]
+        
+        return cell
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("You selected cell #\(indexPath.row)!")
     }
     
     func setChart(dataPoints: [String], values: [Double]){
