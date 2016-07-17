@@ -37,26 +37,19 @@ class SteadyAPI: NSObject {
      * Get Scoresheets for the specific user to this device from the api
      *
      */
-    static func getScoresheets() {
+    static func getScoresheets(successCallback: (NSArray -> Void)?,
+                               failureCallback: (NSError -> Void)?) {
+        
         let url = self.generateUrlForGettingScoresheets()
         
-        func success (data: NSArray) {
-            // This function should trigger graphs to update here when successful
-            
-        }
-        func fail (error: NSError) {
-            // Some Issue occured
-        }
-        
-        self.GET(url, successCallback: success, failureCallback: fail)
+        self.GET(url, successCallback: successCallback, failureCallback: failureCallback)
     }
     
     static func generateUrlForGettingScoresheets() -> String {
-        let device_id = ""
-        return "\(API_URI)\(ENDPOINT_PROMPTS)?device_id=\(device_id)"
+        return "\(ENDPOINT_PROMPTS)?device_id=\(device_id)"
     }
     static func generateUrlForPostingScoresheet() -> String{
-        return "\(API_URI)\(ENDPOINT_SCORESHEETS)"
+        return "\(ENDPOINT_SCORESHEETS)"
     }
     
     static func GET(endpoint: String, successCallback: ((NSArray) -> Void)?, failureCallback: ((NSError) -> Void)?){
