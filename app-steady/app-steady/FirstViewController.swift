@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-var prompts: [String] = []
+var prompts: Dictionary<Int, String> = [:]
 
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
@@ -42,11 +42,15 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         for result in results{
             let question = Question.deserializeQuestion(result as! NSDictionary)
             questions.append(question)
-            prompts.append(result["text"] as! String)
+            
+            let id = result["id"] as! Int
+            let text = result["text"] as! String
+            
+            prompts[id] = text
             
         }
-        print("questions List: \(questions)")
         return questions
+        
     }
 
     //MARK: - UIComponent Customization

@@ -33,14 +33,19 @@ class GraphicalTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func initializeLineChart(){
-        let days = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        let rank = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
+    func initializeLineChart(entries: NSMutableArray){
         
+        var xVals:[String] = []
+        var yVals : [Double] = []
+        for entry in entries {
+              print(entry[0])
+              print(entry[1])
+//            let time = entry[0] as! String
+            xVals.append(entry[0] as! String)
+            yVals.append(entry[1] as! Double)
+        }
         
-        
-        
-        setChart(days, values: rank)
+        setChart(xVals, values: yVals)
         self.addSubview(lineChart)
     }
     

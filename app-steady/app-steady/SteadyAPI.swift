@@ -73,12 +73,10 @@ class SteadyAPI: NSObject {
     }
     
     static func POST(endpoint: String, params: NSDictionary, successCallback: ((NSDictionary) -> Void)?, failureCallback: ((NSError) -> Void)?){
-        print("params: \(params)")
         
         Alamofire.request(.POST, API_URI + endpoint, parameters: params as? [String : AnyObject], encoding: .JSON).responseJSON
             { response in switch response.result {
             case .Success(let JSON):
-                print("Success with JSON: \(JSON)")
                 
                 let result = JSON as! NSDictionary
                 if (successCallback != nil)
