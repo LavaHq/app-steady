@@ -26,9 +26,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view, typically from a nib.
         func successfulScoresheetFetch(data: NSArray){
             // Update the page with the scoresheet data
-            
-            print("Data: \(data)")
             scoresheets = data
+            reformatResults(scoresheets)
             self.initializeTableView()
         }
         
@@ -46,8 +45,15 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         for prompt in prompts {
             results[prompt] = []
         }
-        for value in scoresheets {
-            // Loop through 
+        print(scoresheets)
+        for scoresheet in scoresheets  {
+            // Loop through
+        let date = scoresheet["created"]
+            for entries in scoresheet["entries"] {
+                for entry in entries {
+                    results[entry["prompt"]].append([date, entry["score"]])
+                }
+            }
         }
         
         
