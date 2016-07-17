@@ -15,9 +15,48 @@ let ENDPOINT_ENTRIES = "/entries"
 let ENDPOINT_SCORESHEETS = "/scoresheets"
 
 class SteadyAPI: NSObject {
+
+    /**
+     * Handles saving the Scoresheet of the days
+     *
+     * - Parameters:
+     *   - Scoresheet: A populated scoresheet that is ready to be saved
+     */
+    static func postScoresheet(scoresheet: Scoresheet,
+                               successCallback: (NSDictionary -> Void)?,
+                               failureCallback: (NSError -> Void)?) {
+        
+        let params = scoresheet.toDict()
+        let url = self.generateUrlForPostingScoresheet()
+        self.POST(url,
+                  params: params,
+                  successCallback: successCallback,
+                  failureCallback: failureCallback)
+    }
+    /**
+     * Get Scoresheets for the specific user to this device from the api
+     *
+     */
+    static func getScoresheets() {
+        let url = self.generateUrlForGettingScoresheets()
+        
+        func success (data: NSArray) {
+            // This function should trigger graphs to update here when successful
+            
+        }
+        func fail (error: NSError) {
+            // Some Issue occured
+        }
+        
+        self.GET(url, successCallback: success, failureCallback: fail)
+    }
     
-    static func generateUrlForPromptsWithUser(userID: Int) -> String {
-        return "\(API_URI)\(ENDPOINT_PROMPTS)?userId=\(userID)"
+    static func generateUrlForGettingScoresheets() -> String {
+        let device_id = ""
+        return "\(API_URI)\(ENDPOINT_PROMPTS)?device_id=\(device_id)"
+    }
+    static func generateUrlForPostingScoresheet() -> String{
+        return "\(API_URI)\(ENDPOINT_SCORESHEETS)"
     }
     
     static func GET(endpoint: String, successCallback: ((NSArray) -> Void)?, failureCallback: ((NSError) -> Void)?){

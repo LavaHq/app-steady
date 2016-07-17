@@ -91,15 +91,9 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         mainQuestionIndex += 1
         
         if (mainQuestionIndex == questionList.count)  {
-            let params = scoresheet.toDict()
-            print("Params are...")
-            print(params)
-            SteadyAPI.POST(ENDPOINT_SCORESHEETS,
-                           params: params,
-                           successCallback: nil,
-                           failureCallback: nil)
-            segueToChart()
-            
+            SteadyAPI.postScoresheet(scoresheet,
+                                     successCallback:successfulPostCallback,
+                                     failureCallback: nil)
             return
         }
         
@@ -107,6 +101,9 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
 
     }
     
+    func successfulPostCallback(data: NSDictionary) {
+        segueToChart()
+    }
     func segueToChart()
     {
         tabBarController?.selectedIndex = 1
