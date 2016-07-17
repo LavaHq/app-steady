@@ -19,7 +19,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     var mainQuestionIndex = 0
     var scoresheet = Scoresheet(entries: [])
     
-    let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
     let nextQuestionButton = UIButton(type: UIButtonType.System)
     let pickerData = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     
@@ -81,7 +80,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
      *   - UIButton: The Button that is pressed
      */
     func nextQuestionButtonPressed(sender: UIButton!) {
-        print(self.UUID, self.questionLabel.text!, self.answerData)
+        print(UUID, self.questionLabel.text!, self.answerData)
         
         let score: NSInteger? = self.answerData
         let entry = Entry(question: questionList[mainQuestionIndex], score: score!)

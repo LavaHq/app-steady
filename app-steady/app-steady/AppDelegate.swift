@@ -7,7 +7,9 @@
 //
 
 import UIKit
-let device_id = UIDevice.currentDevice().identifierForVendor!.UUIDString
+//let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+let UUID = "testing"
+
 
 @UIApplicationMain
 
