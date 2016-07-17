@@ -17,7 +17,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     var questionList:[Question] = []
     var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
     var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 21))
-    var answerData = 0
+    var answerData = 1
     var mainQuestionIndex = 0
     var scoresheet = Scoresheet(entries: [])
     
@@ -45,6 +45,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
             prompts.append(result["text"] as! String)
             
         }
+        print("questions List: \(questions)")
         return questions
     }
 

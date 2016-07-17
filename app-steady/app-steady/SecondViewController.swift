@@ -46,17 +46,17 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             results[prompt] = []
         }
         print(scoresheets)
-        for scoresheet in scoresheets  {
-            // Loop through
-        let date = scoresheet["created"]
-            for entries in scoresheet["entries"] {
-                for entry in entries {
-                    results[entry["prompt"]].append([date, entry["score"]])
-                }
-            }
-        }
-        
-        
+//        for scoresheet in scoresheets  {
+//            // Loop through
+//        let date = scoresheet["created"]
+//            for entries in scoresheet["entries"] {
+//                for entry in entries {
+//                    results[entry["prompt"]].append([date, entry["score"]])
+//                }
+//            }
+//        }
+//        
+//        
         
         return results
 //

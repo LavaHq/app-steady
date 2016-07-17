@@ -8,7 +8,7 @@
 
 import UIKit
 //let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
-let UUID = "testing"
+let UUID = "Foood"
 
 
 @UIApplicationMain
