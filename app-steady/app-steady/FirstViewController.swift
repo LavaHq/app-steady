@@ -9,13 +9,15 @@
 import UIKit
 import Alamofire
 
+var prompts: Dictionary<Int, String> = [:]
+
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     
     var questionList:[Question] = []
     var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
     var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 21))
-    var answerData = 0
+    var answerData = 1
     var mainQuestionIndex = 0
     var scoresheet = Scoresheet(entries: [])
     
@@ -40,10 +42,17 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         for result in results{
             let question = Question.deserializeQuestion(result as! NSDictionary)
             questions.append(question)
+            
+            let id = result["id"] as! Int
+            let text = result["text"] as! String
+            
+            prompts[id] = text
+            
         }
         return questions
+        
     }
-    
+
     //MARK: - UIComponent Customization
     func initializeUIComponents(results: NSArray)
     {

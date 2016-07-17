@@ -23,7 +23,7 @@ class Entry: NSObject {
     {
         return [
             "score": score,
-            "question": question.id
+            "prompt": question.id
         ]
     }
     

@@ -15,35 +15,50 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var tableView: UITableView  =   UITableView()
     
-    var items: [String] = ["Viper", "X", "Games"]
+    var items: Dictionary<Int, Any> = [:]
     
     var scoresheets : NSArray = []
     
     let numberOfPrompts = 3 // TODO make this value dynamic
     
+    var questions = Array(prompts.keys)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("start prompts: \(Array(prompts.keys))")
         // Do any additional setup after loading the view, typically from a nib.
         func successfulScoresheetFetch(data: NSArray){
             // Update the page with the scoresheet data
-            
-            print("Data: \(data)")
             scoresheets = data
+            reformatResults(scoresheets)
             self.initializeTableView()
         }
         
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
-        
-        
     }
     
-    func reformatResults() {
-//        
-//        return [
-//            "prompt 1": [[0, 5], [1,2]],
-//            "prompt 2": [[0, 7], [1,6]],
-//            "prompt 3": [[0, 10], [3,4]],
-//        ]
+    func reformatResults(scoresheets: NSArray) -> Dictionary<Int, Any> {
+        
+        
+        var results: Dictionary<Int, Any> = [:]
+        for (id, _) in prompts {
+            results[id] = []
+        }
+        print(scoresheets)
+        for scoresheet in scoresheets  {
+            // Loop through
+        let date = scoresheet["created"] as! String
+            for entry in scoresheet["entries"] as! NSArray {
+                let promptId = entry["prompt"] as! NSInteger
+                let score = entry["score"] as! NSInteger
+                let promptValues = results[promptId] as! NSArray
+                let mutable = NSMutableArray.init(array: promptValues)
+                mutable.addObject([date, score])
+                results[promptId] = mutable
+            }
+        }
+        items = results
+        return results
     }
     
     
@@ -58,16 +73,18 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.scoresheets.count
+        return self.items.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 //        let cell:GraphicalTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GraphicalTableViewCell
         
         let cell : GraphicalTableViewCell = GraphicalTableViewCell.init()
+        let index = indexPath.row
+        let questionId = Array(prompts.keys)[index]
+        let entries = items[questionId] as! NSMutableArray
         
-        
-        cell.initializeLineChart()
+        cell.initializeLineChart(entries)
         cell.backgroundColor = UIColor.redColor()
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
