@@ -33,12 +33,27 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
-        
-        
     }
     
-    func reformatResults() {
-//        
+    func reformatResults(scoresheets: NSArray) -> Dictionary<String, Any> {
+        
+        
+        var results: Dictionary<String, Any> = [:
+//                    "prompt 1": [[0, 5], [1,2]],
+//                    "prompt 2": [[0, 7], [1,6]],
+//                    "prompt 3": [[0, 10], [3,4]],
+                ]
+        for prompt in prompts {
+            results[prompt] = []
+        }
+        for value in scoresheets {
+            // Loop through 
+        }
+        
+        
+        
+        return results
+//
 //        return [
 //            "prompt 1": [[0, 5], [1,2]],
 //            "prompt 2": [[0, 7], [1,6]],

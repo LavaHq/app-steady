@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 
+var prompts: [String] = []
+
 class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     
@@ -40,10 +42,12 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         for result in results{
             let question = Question.deserializeQuestion(result as! NSDictionary)
             questions.append(question)
+            prompts.append(result["text"] as! String)
+            
         }
         return questions
     }
-    
+
     //MARK: - UIComponent Customization
     func initializeUIComponents(results: NSArray)
     {
