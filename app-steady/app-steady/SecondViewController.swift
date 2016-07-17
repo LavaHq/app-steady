@@ -11,8 +11,6 @@ import Charts
 
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var lineChart = LineChartView(frame: CGRectMake(100, 100, 400, 400))
-    
     var days: [String]!
     
     var tableView: UITableView  =   UITableView()
@@ -23,39 +21,30 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.initializeTableView()
-        self.initializeLineChart()
     }
     
     func initializeTableView(){
-        tableView.frame         =   CGRectMake(0, 50, 320, 200);
+        tableView.frame         =   CGRectMake(0, 100, self.view.frame.width, self.view.frame.height - 100);
         tableView.delegate      =   self
         tableView.dataSource    =   self
-        
+//        tableView.backgroundColor = UIColor.blueColor()
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+        tableView.rowHeight = (self.view.frame.height - 110) / 3
         self.view.addSubview(tableView)
     }
     
-    func initializeLineChart(){
-        days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
-        
-//        print(scores) // Use The Sucecssful Call Backs in SteadyApi.GET to correctly access the values
-        
-        let rank = [4.0, 6.0, 8.0, 7.0, 10.0, 10.0, 8.0]
-        
-        setChart(days, values: rank)
-        self.view.addSubview(lineChart)
-    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell:GraphicalTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GraphicalTableViewCell
         
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        
-        cell.textLabel?.text = self.items[indexPath.row]
+        var cell : GraphicalTableViewCell = GraphicalTableViewCell.init()
+//
+        cell.initializeLineChart()
+        cell.backgroundColor = UIColor.redColor()
         
         return cell
         
@@ -65,19 +54,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("You selected cell #\(indexPath.row)!")
     }
     
-    func setChart(dataPoints: [String], values: [Double]){
-        
-        var dataEntries: [ChartDataEntry] = []
-        
-        for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
-            dataEntries.append(dataEntry)
-        }
-        
-        let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Score")
-        let chartData = LineChartData(xVals: days, dataSet: chartDataSet)
-        lineChart.data = chartData
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
