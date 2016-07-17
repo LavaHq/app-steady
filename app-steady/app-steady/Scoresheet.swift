@@ -27,7 +27,7 @@ class Scoresheet: NSObject {
             dictEntryList.append(entry.toDict())
         }
         
-        let dict = ["entries" : dictEntryList, "device_id": device_id]
+        let dict = ["entries" : dictEntryList, "device_id": UUID]
         
         return dict
     }

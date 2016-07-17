@@ -46,7 +46,7 @@ class SteadyAPI: NSObject {
     }
     
     static func generateUrlForGettingScoresheets() -> String {
-        return "\(ENDPOINT_PROMPTS)?device_id=\(device_id)"
+        return "\(ENDPOINT_SCORESHEETS)?device_id=\(UUID)"
     }
     static func generateUrlForPostingScoresheet() -> String{
         return "\(ENDPOINT_SCORESHEETS)"
@@ -58,7 +58,6 @@ class SteadyAPI: NSObject {
         case.Success(_):
             
             let results :NSArray = response.result.value!["results"] as! NSArray
-            
             if (successCallback != nil)
             {
                 successCallback!(results)

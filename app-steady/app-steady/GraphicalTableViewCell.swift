@@ -34,9 +34,11 @@ class GraphicalTableViewCell: UITableViewCell {
     }
     
     func initializeLineChart(){
-        let days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
+        let days = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        let rank = [20.0, 4.0, 6.0, 3.0, 12.0, 16.0]
         
-        let rank = [4.0, 6.0, 8.0, 7.0, 10.0, 10.0, 8.0]
+        
+        
         
         setChart(days, values: rank)
         self.addSubview(lineChart)
@@ -49,11 +51,13 @@ class GraphicalTableViewCell: UITableViewCell {
         for i in 0..<dataPoints.count {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
             dataEntries.append(dataEntry)
+//            print("Entry: \(dataEntry)")
         }
+        print (dataEntries)
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
+        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
+        lineChart.data = lineChartData
         
-        let chartDataSet = LineChartDataSet(yVals: dataEntries, label: "Score")
-        let chartData = LineChartData(xVals: days, dataSet: chartDataSet)
-        lineChart.data = chartData
     }
 
 }
