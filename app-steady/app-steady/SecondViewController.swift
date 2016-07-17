@@ -17,9 +17,20 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var items: [String] = ["Viper", "X", "Games"]
 
+    var scoresheets : [String: Any] = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        func successfulScoresheetFetch(data: NSArray){
+            // Update the page with the scoresheet data
+            print(data)
+            
+            
+        }
+        
+        SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
+        
         self.initializeTableView()
     }
     
