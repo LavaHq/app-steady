@@ -25,11 +25,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("start prompts: \(Array(prompts.keys))")
         // Do any additional setup after loading the view, typically from a nib.
+        
         func successfulScoresheetFetch(data: NSArray){
             // Update the page with the scoresheet data
             scoresheets = data
+            print(scoresheets)
             reformatResults(scoresheets)
             self.initializeTableView()
         }
@@ -37,14 +38,13 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
     }
     
-    func reformatResults(scoresheets: NSArray) -> Dictionary<Int, Any> {
+    func reformatResults(scoresheets: NSArray){
         
         
         var results: Dictionary<Int, Any> = [:]
         for (id, _) in prompts {
             results[id] = []
         }
-        print(scoresheets)
         for scoresheet in scoresheets  {
             // Loop through
         let date = scoresheet["created"] as! String
@@ -58,9 +58,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         items = results
-        return results
     }
-    
     
     func initializeTableView(){
         tableView.frame         =   CGRectMake(0, 100, self.view.frame.width, self.view.frame.height - 100);

@@ -38,14 +38,23 @@ class GraphicalTableViewCell: UITableViewCell {
         var xVals:[String] = []
         var yVals : [Double] = []
         for entry in entries {
-              print(entry[0])
-              print(entry[1])
-//            let time = entry[0] as! String
             xVals.append(entry[0] as! String)
             yVals.append(entry[1] as! Double)
         }
         
         setChart(xVals, values: yVals)
+        
+        lineChart.dragEnabled = false
+        lineChart.doubleTapToZoomEnabled = false
+        lineChart.drawBordersEnabled = true
+        lineChart.xAxis.enabled = false
+        lineChart.descriptionText = ""
+        lineChart.legend
+        
+        let legend = ChartLegend()
+        let chartViewPortHandler = ChartViewPortHandler()
+        let chartLegendRenderer = ChartLegendRenderer(viewPortHandler: chartViewPortHandler, legend: legend)
+//        lineChart = chartLegendRenderer
         self.addSubview(lineChart)
     }
     
@@ -57,8 +66,12 @@ class GraphicalTableViewCell: UITableViewCell {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
             dataEntries.append(dataEntry)
         }
-        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "Units Sold")
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "Progress")
+        lineChartDataSet.circleHoleRadius = 0.0
+        lineChartDataSet.label = ""
+        
         let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
+        
         lineChart.data = lineChartData
         
     }
