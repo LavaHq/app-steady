@@ -89,7 +89,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
      *   - UIButton: The Button that is pressed
      */
     func nextQuestionButtonPressed(sender: UIButton!) {
-        print(UUID, self.questionLabel.text!, self.answerData)
         
         let score: NSInteger? = self.answerData
         let entry = Entry(question: questionList[mainQuestionIndex], score: score!)
