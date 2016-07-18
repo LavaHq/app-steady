@@ -49,12 +49,12 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChart.drawBordersEnabled = true
         lineChart.xAxis.enabled = false
         lineChart.descriptionText = ""
-        lineChart.legend
+        
         
         let legend = ChartLegend()
         let chartViewPortHandler = ChartViewPortHandler()
         let chartLegendRenderer = ChartLegendRenderer(viewPortHandler: chartViewPortHandler, legend: legend)
-//        lineChart = chartLegendRenderer
+        
         self.addSubview(lineChart)
     }
     
@@ -71,7 +71,7 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChartDataSet.label = ""
         
         let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
-        
+        lineChartData.setDrawValues(false)
         lineChart.data = lineChartData
         
     }
