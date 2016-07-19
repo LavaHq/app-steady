@@ -66,6 +66,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource    =   self
         tableView.registerClass(GraphicalTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = (self.view.frame.height - 110) / 3
+        tableView.sectionHeaderHeight = 70
+        
         self.view.addSubview(tableView)
     }
     

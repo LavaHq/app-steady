@@ -49,11 +49,8 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChart.drawBordersEnabled = true
         lineChart.xAxis.enabled = false
         lineChart.descriptionText = ""
-        
-        
-        let legend = ChartLegend()
-        let chartViewPortHandler = ChartViewPortHandler()
-        let chartLegendRenderer = ChartLegendRenderer(viewPortHandler: chartViewPortHandler, legend: legend)
+        lineChart.legend.enabled = false
+        lineChart.rightAxis.enabled = false
         
         self.addSubview(lineChart)
     }
