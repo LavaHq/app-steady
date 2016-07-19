@@ -51,7 +51,13 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChart.descriptionText = ""
         lineChart.legend.enabled = false
         lineChart.rightAxis.enabled = false
+//        lineChart.borderColor = UIColor.whiteColor()
         
+        let questionLabel = UILabel(frame: CGRect.init(x: 0, y: 0, width: lineChart.frame.width, height: 100))
+        questionLabel.text = "Testing"
+        questionLabel.textAlignment = NSTextAlignment.Center
+        
+        self.addSubview(questionLabel)
         self.addSubview(lineChart)
     }
     

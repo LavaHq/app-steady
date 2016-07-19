@@ -85,7 +85,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let entries = items[questionId] as! NSMutableArray
         
         cell.initializeLineChart(entries)
-        cell.backgroundColor = UIColor.redColor()
+//        cell.backgroundColor = UIColor.redColor()
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
