@@ -19,7 +19,6 @@ class GraphicalTableViewCell: UITableViewCell {
     var x_bounds: [Int] = []
     var y_bounds: [Int] = []
     var data: [[Int]] = [[]]
-    
     var days: [String]!
 
     override func awakeFromNib() {
@@ -32,8 +31,9 @@ class GraphicalTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
     
-    func initializeLineChart(entries: NSMutableArray){
+    func initializeLineChart(entries: NSMutableArray, questionText: String){
         
         var xVals:[String] = []
         var yVals : [Double] = []
@@ -53,9 +53,10 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChart.rightAxis.enabled = false
 //        lineChart.borderColor = UIColor.whiteColor()
         
-        let questionLabel = UILabel(frame: CGRect.init(x: 0, y: 0, width: lineChart.frame.width, height: 100))
-        questionLabel.text = "Testing"
-        questionLabel.textAlignment = NSTextAlignment.Center
+        let questionLabel = UILabel(frame: CGRect.init(x: 50, y: -5, width: lineChart.frame.width, height: 100))
+        questionLabel.text = questionText
+        questionLabel.textAlignment = NSTextAlignment.Left
+        
         
         self.addSubview(questionLabel)
         self.addSubview(lineChart)

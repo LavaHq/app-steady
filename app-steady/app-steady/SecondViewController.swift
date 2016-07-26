@@ -38,6 +38,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
     }
     
+    /*
+     * Don't touch this function until API response is adjusted
+     */
     func reformatResults(scoresheets: NSArray){
         
         
@@ -84,7 +87,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let questionId = Array(prompts.keys)[index]
         let entries = items[questionId] as! NSMutableArray
         
-        cell.initializeLineChart(entries)
+        cell.initializeLineChart(entries, questionText: prompts[questionId]!)
+        
 //        cell.backgroundColor = UIColor.redColor()
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
