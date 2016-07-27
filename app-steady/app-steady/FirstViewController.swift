@@ -16,7 +16,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     var questionList:[Question] = []
     var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
-    var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 21))
+    var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 100))
     var answerData = 1
     var mainQuestionIndex = 0
     var scoresheet = Scoresheet(entries: [])
@@ -70,18 +70,25 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         questionLabel.textAlignment = NSTextAlignment.Center
         questionLabel.updateQuestion(questionList[0])
         questionLabel.textColor = COLOR_TEXT
+        questionLabel.numberOfLines = 0
+        questionLabel.font = UIFont(name: FONT_MEDIUM, size: 25.0)
         self.view.addSubview(questionLabel)
     }
     
     func initializeNextQuestionButton () {
         nextQuestionButton.setTitle("Next Question", forState: UIControlState.Normal)
-        nextQuestionButton.frame = CGRectMake(100, 500, 200, 21)
+        nextQuestionButton.setTitleColor(COLOR_TEXT, forState: UIControlState.Normal)
+        nextQuestionButton.backgroundColor = COLOR_BUTTON
+        nextQuestionButton.titleLabel?.font = UIFont(name: FONT_MEDIUM , size: 20.0)
+        nextQuestionButton.frame = CGRectMake(50, 600, 300, 50)
+        nextQuestionButton.layer.cornerRadius = 5.0
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(nextQuestionButton)
     }
     
     func initializeAnswerPicker() {
         self.view.addSubview(answerPicker)
+        answerPicker.tintColor = COLOR_TINT
         answerPicker.dataSource = self
         answerPicker.delegate = self
     }
@@ -89,6 +96,11 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     func initializeResultsButton(){
         resultsButton.setTitle("Results", forState: UIControlState.Normal)
         resultsButton.frame = CGRectMake(300, 12, 75, 50)
+        resultsButton.layer.cornerRadius = 5.0
+        resultsButton.titleLabel?.font = UIFont(name: FONT_MEDIUM , size: 20.0)
+        resultsButton.setTitleColor(COLOR_TEXT, forState: UIControlState.Normal)
+        resultsButton.backgroundColor = COLOR_TINT
+        
         resultsButton.addTarget(self, action: #selector(self.segueToChart), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(resultsButton)
     }

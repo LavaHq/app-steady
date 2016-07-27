@@ -54,10 +54,12 @@ func hexStringToUIColor (hex:String) -> UIColor {
 
 
 let COLOR_TEXT = hexStringToUIColor("#ffffff")
-let COLOR_BACKGROUND = hexStringToUIColor("#2d3e50")
-let COLOR_BORDER = hexStringToUIColor("#ffffff")
-let COLOR_FOREGROUND = hexStringToUIColor("##28b08a")
-
+let COLOR_BACKGROUND = hexStringToUIColor("#99c05e")
+let COLOR_BORDER = hexStringToUIColor("#525d40")
+let COLOR_FOREGROUND = hexStringToUIColor("#28b08a")
+let COLOR_BUTTON = hexStringToUIColor("#4c602f")
+let COLOR_TINT = hexStringToUIColor("#89ac54")
+let FONT_MEDIUM = "Avenir-Medium"
 
 @UIApplicationMain
 
