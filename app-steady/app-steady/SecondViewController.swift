@@ -16,7 +16,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var items: Dictionary<Int, Any> = [:]
     var scoresheets : NSArray = []
     var questions = Array(prompts.keys)
-    
+        
     let numberOfPrompts = 3 // TODO make this value dynamic
     
     override func viewDidLoad() {
@@ -31,6 +31,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
+        
+        initializeBackButton()
     }
     
     /*
@@ -63,7 +65,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.registerClass(GraphicalTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = (self.view.frame.height - 110) / 3
+        tableView.rowHeight = (self.view.frame.height - 120) / 3
         tableView.sectionHeaderHeight = 70
         tableView.backgroundColor = COLOR_BACKGROUND
         tableView.separatorColor = UIColor.clearColor()
@@ -91,6 +93,22 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
+    }
+    
+    func initializeBackButton(){
+        let backbutton = UIButton(type: .Custom)
+        backbutton.setImage(UIImage(named: "BackButton.png"), forState: .Normal)
+        backbutton.setTitle("Back", forState: .Normal)
+        backbutton.setTitleColor(backbutton.tintColor, forState: .Normal)
+        backbutton.addTarget(self, action: #selector(SecondViewController.backAction), forControlEvents: .TouchUpInside)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
+        self.view.addSubview(backbutton)
+
+    }
+    
+    func backAction() -> Void {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
 
