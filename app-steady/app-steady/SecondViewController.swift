@@ -19,6 +19,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     let numberOfPrompts = 3 // TODO make this value dynamic
     
+    let backButton = UIButton(type: UIButtonType.System)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -32,7 +34,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
         
-        initializeBackButton()
+        self.initializeBackButton()
     }
     
     /*
@@ -96,19 +98,19 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func initializeBackButton(){
-        let backbutton = UIButton(type: .Custom)
-        backbutton.setImage(UIImage(named: "BackButton.png"), forState: .Normal)
-        backbutton.setTitle("Back", forState: .Normal)
-        backbutton.setTitleColor(backbutton.tintColor, forState: .Normal)
-        backbutton.addTarget(self, action: #selector(SecondViewController.backAction), forControlEvents: .TouchUpInside)
+        backButton.setImage(UIImage(named: "BackButton.png"), forState: .Normal)
+        backButton.frame = CGRectMake(0, 12, 75, 50)
+        backButton.setTitle("Back", forState: .Normal)
+        backButton.setTitleColor(backButton.tintColor, forState: .Normal)
+        backButton.addTarget(self, action: #selector(SecondViewController.backAction), forControlEvents: .TouchUpInside)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
-        self.view.addSubview(backbutton)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        self.view.addSubview(backButton)
 
     }
     
     func backAction() -> Void {
-        self.navigationController?.popViewControllerAnimated(true)
+        tabBarController?.selectedIndex = 0
     }
     
 
