@@ -16,8 +16,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var items: Dictionary<Int, Any> = [:]
     var scoresheets : NSArray = []
     var questions = Array(prompts.keys)
-    
+        
     let numberOfPrompts = 3 // TODO make this value dynamic
+    
+    let backButton = UIButton(type: UIButtonType.System)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
+        
+        self.initializeBackButton()
     }
     
     /*
@@ -63,7 +67,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.registerClass(GraphicalTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = (self.view.frame.height - 110) / 3
+        tableView.rowHeight = (self.view.frame.height - 120) / 3
         tableView.sectionHeaderHeight = 70
         tableView.backgroundColor = COLOR_BACKGROUND
         tableView.separatorColor = UIColor.clearColor()
@@ -91,6 +95,22 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
+    }
+    
+    func initializeBackButton(){
+        backButton.setImage(UIImage(named: "BackButton.png"), forState: .Normal)
+        backButton.frame = CGRectMake(0, 12, 75, 50)
+        backButton.setTitle("Back", forState: .Normal)
+        backButton.setTitleColor(backButton.tintColor, forState: .Normal)
+        backButton.addTarget(self, action: #selector(self.backAction), forControlEvents: .TouchUpInside)
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        self.view.addSubview(backButton)
+
+    }
+    
+    func backAction() -> Void {
+        tabBarController?.selectedIndex = 0
     }
     
 
