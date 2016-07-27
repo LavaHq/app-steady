@@ -11,7 +11,7 @@ import Charts
 
 class GraphicalTableViewCell: UITableViewCell {
     
-    var lineChart = LineChartView(frame: CGRectMake(0, 0, 400, 200))
+    var lineChart = LineChartView(frame: CGRectMake(0, 0, 400, 210))
 
     var question: Question = Question(text: "", id: 0)
     var x_label: String = ""
@@ -24,6 +24,9 @@ class GraphicalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.backgroundColor = COLOR_BACKGROUND
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -51,15 +54,16 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChart.descriptionText = ""
         lineChart.legend.enabled = false
         lineChart.rightAxis.enabled = false
-//        lineChart.borderColor = UIColor.whiteColor()
+        lineChart.borderColor = COLOR_BORDER
+        lineChart.backgroundColor = COLOR_BACKGROUND
         
         let questionLabel = UILabel(frame: CGRect.init(x: 50, y: -5, width: lineChart.frame.width, height: 100))
         questionLabel.text = questionText
+        questionLabel.textColor = COLOR_TEXT
         questionLabel.textAlignment = NSTextAlignment.Left
         
-        
-        self.addSubview(questionLabel)
         self.addSubview(lineChart)
+        self.addSubview(questionLabel)
     }
     
     func setChart(dataPoints: [String], values: [Double]){

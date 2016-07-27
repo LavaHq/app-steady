@@ -7,9 +7,27 @@
 //
 
 import UIKit
+
+
+// GLOBAL CONSTANTS
 //let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
 let UUID = "jar-asdjar"
+let COLOR_TEXT = UIColor.init(
+    colorLiteralRed: 85.0/255.0,
+    green: 107.0/255.0,
+    blue: 120.0/255.0,
+    alpha: 1.0)
+let COLOR_BACKGROUND = UIColor.init(
+    colorLiteralRed: 245.0/255.0,
+    green: 247.0/255.0,
+    blue: 249.0/255.0,
+    alpha: 1.0)
 
+let COLOR_BORDER = UIColor.init(
+    colorLiteralRed: 167.0/255.0,
+    green: 173.0/255.0,
+    blue: 186.0/255.0,
+    alpha: 1.0)
 
 @UIApplicationMain
 

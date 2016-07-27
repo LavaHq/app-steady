@@ -12,25 +12,20 @@ import Charts
 class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var days: [String]!
-    
     var tableView: UITableView  =   UITableView()
-    
     var items: Dictionary<Int, Any> = [:]
-    
     var scoresheets : NSArray = []
+    var questions = Array(prompts.keys)
     
     let numberOfPrompts = 3 // TODO make this value dynamic
-    
-    var questions = Array(prompts.keys)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.view.backgroundColor = COLOR_BACKGROUND
         func successfulScoresheetFetch(data: NSArray){
             // Update the page with the scoresheet data
             scoresheets = data
-            print(scoresheets)
             reformatResults(scoresheets)
             self.initializeTableView()
         }
@@ -70,7 +65,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.registerClass(GraphicalTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = (self.view.frame.height - 110) / 3
         tableView.sectionHeaderHeight = 70
-        
+        tableView.backgroundColor = COLOR_BACKGROUND
+        tableView.separatorColor = UIColor.clearColor()
         self.view.addSubview(tableView)
     }
     
@@ -80,7 +76,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell:GraphicalTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! GraphicalTableViewCell
         
         let cell : GraphicalTableViewCell = GraphicalTableViewCell.init()
         let index = indexPath.row
@@ -88,8 +83,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let entries = items[questionId] as! NSMutableArray
         
         cell.initializeLineChart(entries, questionText: prompts[questionId]!)
-        
-//        cell.backgroundColor = UIColor.redColor()
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell

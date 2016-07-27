@@ -28,6 +28,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         super.viewDidLoad()
         tabBarController?.tabBar.hidden = true 
         SteadyAPI.GET(ENDPOINT_PROMPTS, successCallback: initializeUIComponents, failureCallback: nil)
+        self.view.backgroundColor = COLOR_BACKGROUND
     }
     
     /**
@@ -66,6 +67,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     func initializeQuestionLabel() {
         questionLabel.textAlignment = NSTextAlignment.Center
         questionLabel.updateQuestion(questionList[0])
+        questionLabel.textColor = COLOR_TEXT
         self.view.addSubview(questionLabel)
     }
     
