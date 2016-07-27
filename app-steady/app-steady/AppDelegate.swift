@@ -12,22 +12,52 @@ import UIKit
 // GLOBAL CONSTANTS
 //let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
 let UUID = "jar-asdjar"
-let COLOR_TEXT = UIColor.init(
-    colorLiteralRed: 85.0/255.0,
-    green: 107.0/255.0,
-    blue: 120.0/255.0,
-    alpha: 1.0)
-let COLOR_BACKGROUND = UIColor.init(
-    colorLiteralRed: 245.0/255.0,
-    green: 247.0/255.0,
-    blue: 249.0/255.0,
-    alpha: 1.0)
+//
+//let COLOR_TEXT = UIColor.init(
+//    colorLiteralRed: 85.0/255.0,
+//    green: 107.0/255.0,
+//    blue: 120.0/255.0,
+//    alpha: 1.0)
+//let COLOR_BACKGROUND = UIColor.init(
+//    colorLiteralRed: 245.0/255.0,
+//    green: 247.0/255.0,
+//    blue: 249.0/255.0,
+//    alpha: 1.0)
+//
+//let COLOR_BORDER = UIColor.init(
+//    colorLiteralRed: 167.0/255.0,
+//    green: 173.0/255.0,
+//    blue: 186.0/255.0,
+//    alpha: 1.0)
 
-let COLOR_BORDER = UIColor.init(
-    colorLiteralRed: 167.0/255.0,
-    green: 173.0/255.0,
-    blue: 186.0/255.0,
-    alpha: 1.0)
+func hexStringToUIColor (hex:String) -> UIColor {
+    var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString
+    
+    if (cString.hasPrefix("#")) {
+        cString = cString.substringFromIndex(cString.startIndex.advancedBy(1))
+    }
+    
+    if ((cString.characters.count) != 6) {
+        return UIColor.grayColor()
+    }
+    
+    var rgbValue:UInt32 = 0
+    NSScanner(string: cString).scanHexInt(&rgbValue)
+    
+    return UIColor(
+        red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+        green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+        blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+        alpha: CGFloat(1.0)
+    )
+}
+
+
+let COLOR_TEXT = hexStringToUIColor("#ffffff")
+let COLOR_BACKGROUND = hexStringToUIColor("#2d3e50")
+let COLOR_BORDER = hexStringToUIColor("#ffffff")
+let COLOR_FOREGROUND = hexStringToUIColor("##28b08a")
+
 
 @UIApplicationMain
 
