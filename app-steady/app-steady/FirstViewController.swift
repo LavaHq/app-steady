@@ -22,6 +22,8 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     var scoresheet = Scoresheet(entries: [])
     
     let nextQuestionButton = UIButton(type: UIButtonType.System)
+    let resultsButton = UIButton(type: UIButtonType.System)
+    
     let pickerData = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     
     override func viewDidLoad() {
@@ -61,7 +63,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.initializeQuestionLabel()
         self.initializeAnswerPicker()
         self.initializeNextQuestionButton()
-        
+        self.initializeResultsButton()
     }
     
     func initializeQuestionLabel() {
@@ -82,6 +84,13 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.view.addSubview(answerPicker)
         answerPicker.dataSource = self
         answerPicker.delegate = self
+    }
+    
+    func initializeResultsButton(){
+        resultsButton.setTitle("Results", forState: UIControlState.Normal)
+        resultsButton.frame = CGRectMake(300, 12, 75, 50)
+        resultsButton.addTarget(self, action: #selector(self.segueToChart), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(resultsButton)
     }
     
     /**

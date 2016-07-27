@@ -102,7 +102,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         backButton.frame = CGRectMake(0, 12, 75, 50)
         backButton.setTitle("Back", forState: .Normal)
         backButton.setTitleColor(backButton.tintColor, forState: .Normal)
-        backButton.addTarget(self, action: #selector(SecondViewController.backAction), forControlEvents: .TouchUpInside)
+        backButton.addTarget(self, action: #selector(self.backAction), forControlEvents: .TouchUpInside)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         self.view.addSubview(backButton)
