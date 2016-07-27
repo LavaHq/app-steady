@@ -11,13 +11,13 @@ import Charts
 
 class GraphicalTableViewCell: UITableViewCell {
     
-    var lineChart = LineChartView(frame: CGRectMake(0, 0, 400, 210))
+    var lineChart = LineChartView(frame: CGRectMake(0, 0, 400, 206))
 
     var question: Question = Question(text: "", id: 0)
     var x_label: String = ""
     var y_label: String = ""
     var x_bounds: [Int] = []
-    var y_bounds: [Int] = []
+    var y_bounds: [Int] = [0, 10]
     var data: [[Int]] = [[]]
     var days: [String]!
 
