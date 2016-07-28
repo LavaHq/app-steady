@@ -11,7 +11,7 @@ import Charts
 
 class GraphicalTableViewCell: UITableViewCell {
     
-    var lineChart = LineChartView(frame: CGRectMake(0, 0, 400, 206))
+    var lineChart = LineChartView(frame: CGRectMake(0, 100, 400, 206))
 
     var question: Question = Question(text: "", id: 0)
     var x_label: String = ""
@@ -57,9 +57,11 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChart.borderColor = COLOR_BORDER
         lineChart.backgroundColor = COLOR_BACKGROUND
         
-        let questionLabel = UILabel(frame: CGRect.init(x: 50, y: -5, width: lineChart.frame.width, height: 100))
+        let questionLabel = UILabel(frame: CGRect.init(x: 0, y: -5, width: lineChart.frame.width, height: 100))
         questionLabel.text = questionText
         questionLabel.textColor = COLOR_TEXT
+        questionLabel.backgroundColor = COLOR_TINT
+        questionLabel.font = UIFont(name: FONT_MEDIUM, size: 15.0)
         questionLabel.textAlignment = NSTextAlignment.Left
         
         self.addSubview(lineChart)
