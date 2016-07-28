@@ -25,6 +25,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.view.backgroundColor = COLOR_BACKGROUND
+        
+        self.initializeBackButton()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         func successfulScoresheetFetch(data: NSArray){
             // Update the page with the scoresheet data
             scoresheets = data
@@ -33,8 +38,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
-        
-        self.initializeBackButton()
     }
     
     /*

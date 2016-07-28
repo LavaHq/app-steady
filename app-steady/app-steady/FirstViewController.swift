@@ -33,6 +33,13 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.view.backgroundColor = COLOR_BACKGROUND
     }
     
+    override func viewWillAppear(animated: Bool) {
+        answerData = 1
+        mainQuestionIndex = 0
+        scoresheet = Scoresheet(entries: [])
+        questionLabel.text = "First Question"
+    }
+    
     /**
      * Converts the list of questions from the api into a collection of Question objects
      *
