@@ -78,6 +78,7 @@ class GraphicalTableViewCell: UITableViewCell {
         }
         let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "Progress")
         lineChartDataSet.circleHoleRadius = 0.0
+        lineChartDataSet.lineWidth = 5.0
         lineChartDataSet.label = ""
         
         let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
