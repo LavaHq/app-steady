@@ -37,7 +37,9 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         answerData = 1
         mainQuestionIndex = 0
         scoresheet = Scoresheet(entries: [])
-        questionLabel.text = "First Question"
+        if (questionList.count > 0) {
+            questionLabel.updateQuestion(questionList[0])
+        }
     }
     
     /**
