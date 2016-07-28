@@ -67,7 +67,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.registerClass(GraphicalTableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = (self.view.frame.height - 120) / 3
+        tableView.rowHeight = (self.view.frame.height - 120) / 2
         tableView.sectionHeaderHeight = 70
         tableView.backgroundColor = COLOR_BACKGROUND
         tableView.separatorColor = UIColor.clearColor()
@@ -88,7 +88,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.initializeLineChart(entries, questionText: prompts[questionId]!)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        
+        cell.backgroundColor = COLOR_BACKGROUND
         return cell
         
     }
@@ -98,10 +98,11 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func initializeBackButton(){
-        backButton.setImage(UIImage(named: "BackButton.png"), forState: .Normal)
+        let origImage = UIImage(named: "BackButton.png");
+        let tintedImage = origImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        backButton.setImage(tintedImage, forState: .Normal)
+        backButton.tintColor = COLOR_TEXT
         backButton.frame = CGRectMake(0, 12, 75, 50)
-        backButton.setTitle("Back", forState: .Normal)
-        backButton.setTitleColor(backButton.tintColor, forState: .Normal)
         backButton.addTarget(self, action: #selector(self.backAction), forControlEvents: .TouchUpInside)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
