@@ -18,7 +18,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var questions = Array(prompts.keys)
         
     let numberOfPrompts = 3 // TODO make this value dynamic
-    
     let backButton = UIButton(type: UIButtonType.System)
     
     override func viewDidLoad() {
@@ -32,7 +31,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.initializeTableView()
         }
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
-        self.initializeBackButton()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -51,7 +49,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
      * Don't touch this function until API response is adjusted
      */
     func reformatResults(scoresheets: NSArray){
-        
         
         var results: Dictionary<Int, Any> = [:]
         for (id, _) in prompts {
@@ -73,7 +70,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func initializeTableView(){
-        tableView.frame         =   CGRectMake(0, 100, self.view.frame.width, self.view.frame.height - 100);
+        tableView.frame         =   CGRectMake(0, 0, self.view.frame.width, self.view.frame.height - 100);
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.registerClass(GraphicalTableViewCell.self, forCellReuseIdentifier: "cell")
@@ -106,17 +103,22 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
     }
-    
-    func initializeBackButton(){
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 60))
+        
+        initializeBackButton(headerView)
+        return headerView
+    }
+    func initializeBackButton(parentView: UIView){
         let origImage = UIImage(named: "BackButton.png");
         let tintedImage = origImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         backButton.setImage(tintedImage, forState: .Normal)
         backButton.tintColor = COLOR_TEXT
-        backButton.frame = CGRectMake(0, 12, 75, 50)
+        backButton.frame = CGRectMake(0, 20, 40, 40)
         backButton.addTarget(self, action: #selector(self.backAction), forControlEvents: .TouchUpInside)
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.view.addSubview(backButton)
+        parentView.addSubview(backButton)
 
     }
     

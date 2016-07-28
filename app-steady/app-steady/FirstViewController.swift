@@ -15,8 +15,8 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     
     var questionList:[Question] = []
-    var answerPicker = UIPickerView(frame: CGRectMake(100, 300, 200, 100))
-    var questionLabel = QuestionLabel(frame: CGRectMake(0, 100, 400, 100))
+    var answerPicker = UIPickerView()
+    var questionLabel = QuestionLabel()
     var answerData = 1
     var mainQuestionIndex = 0
     var scoresheet = Scoresheet(entries: [])
@@ -31,6 +31,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         tabBarController?.tabBar.hidden = true 
         SteadyAPI.GET(ENDPOINT_PROMPTS, successCallback: initializeUIComponents, failureCallback: nil)
         self.view.backgroundColor = COLOR_BACKGROUND
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,6 +73,8 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         self.initializeAnswerPicker()
         self.initializeNextQuestionButton()
         self.initializeResultsButton()
+        
+        initializeConstraints()
     }
     
     func initializeQuestionLabel() {
@@ -79,6 +82,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         questionLabel.updateQuestion(questionList[0])
         questionLabel.textColor = COLOR_TEXT
         questionLabel.numberOfLines = 0
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionLabel.font = UIFont(name: FONT_MEDIUM, size: 25.0)
         self.view.addSubview(questionLabel)
     }
@@ -90,6 +94,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         nextQuestionButton.titleLabel?.font = UIFont(name: FONT_MEDIUM , size: 20.0)
         nextQuestionButton.frame = CGRectMake(50, 600, 300, 50)
         nextQuestionButton.layer.cornerRadius = 5.0
+        nextQuestionButton.translatesAutoresizingMaskIntoConstraints = false
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(nextQuestionButton)
     }
@@ -97,6 +102,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     func initializeAnswerPicker() {
         self.view.addSubview(answerPicker)
         answerPicker.tintColor = COLOR_TINT
+        answerPicker.translatesAutoresizingMaskIntoConstraints = false
         answerPicker.dataSource = self
         answerPicker.delegate = self
     }
@@ -108,11 +114,104 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         resultsButton.titleLabel?.font = UIFont(name: FONT_MEDIUM , size: 20.0)
         resultsButton.setTitleColor(COLOR_TEXT, forState: UIControlState.Normal)
         resultsButton.backgroundColor = COLOR_TINT
-        
+        resultsButton.translatesAutoresizingMaskIntoConstraints = false
         resultsButton.addTarget(self, action: #selector(self.segueToChart), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(resultsButton)
     }
-    
+    func initializeConstraints(){
+        var allConstraints = [NSLayoutConstraint]()
+        let viewsFromTheSix = [
+            "questionLabel": questionLabel,
+            "nextQuestionButton": nextQuestionButton,
+            "answerPicker": answerPicker,
+            "resultsButton": resultsButton
+        ]
+        let metrics = [
+            "pickerButtonSpace": self.view.frame.height / 5
+        
+        ]
+        //Results Button
+        
+        let horizontalResultsButtonConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "[resultsButton(75)]-20-|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += horizontalResultsButtonConstraints
+        
+        let verticalResultsButtonConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|-30-[resultsButton(50)]",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += verticalResultsButtonConstraints
+        
+        
+        
+        
+        
+        
+        // Question Label
+        let horizontalQuestionLabelConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "|-20-[questionLabel]-20-|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += horizontalQuestionLabelConstraints
+        
+        let verticalQuestionLabelConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:[resultsButton]-[questionLabel]",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += verticalQuestionLabelConstraints
+        
+        // NextQuestionButton
+        let horizontalQuestionButtonConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "|-20-[nextQuestionButton]-20-|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += horizontalQuestionButtonConstraints
+        
+        let verticalQuestionButtonConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:[nextQuestionButton(100)]-50-|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += verticalQuestionButtonConstraints
+        
+        // Answer Picker
+        let horizontalAnswerPickerConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "|-20-[answerPicker]-20-|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += horizontalAnswerPickerConstraints
+        
+        let verticalAnswerPickerConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:[questionLabel]-20-[answerPicker]-(pickerButtonSpace)-[nextQuestionButton]",
+            options: [],
+            metrics: metrics,
+            views: viewsFromTheSix)
+        
+        allConstraints += verticalAnswerPickerConstraints
+        
+        resultsButton
+        
+        
+        
+        
+        NSLayoutConstraint.activateConstraints(allConstraints)
+       
+    }
     /**
      * When the Submit Button is pressed, present the next question. If we are out of questions, segue to the next controller
      *

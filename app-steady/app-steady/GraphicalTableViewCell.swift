@@ -61,8 +61,9 @@ class GraphicalTableViewCell: UITableViewCell {
         questionLabel.text = questionText
         questionLabel.textColor = COLOR_TEXT
         questionLabel.backgroundColor = COLOR_TINT
-        questionLabel.font = UIFont(name: FONT_MEDIUM, size: 15.0)
-        questionLabel.textAlignment = NSTextAlignment.Left
+        questionLabel.font = UIFont(name: FONT_MEDIUM, size: 20.0)
+        questionLabel.textAlignment = NSTextAlignment.Center
+        
         
         self.addSubview(lineChart)
         self.addSubview(questionLabel)
