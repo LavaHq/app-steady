@@ -31,10 +31,20 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             reformatResults(scoresheets)
             self.initializeTableView()
         }
-        
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
-        
         self.initializeBackButton()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        func successfulUpdateScoresheetFetch(data: NSArray){
+            // Update the page with the scoresheet data
+            scoresheets = data
+            reformatResults(scoresheets)
+            tableView.reloadData()
+        }
+        if (scoresheets.count > 0) {
+            SteadyAPI.getScoresheets(successfulUpdateScoresheetFetch, failureCallback: nil)
+        }
     }
     
     /*
