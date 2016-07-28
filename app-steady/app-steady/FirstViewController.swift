@@ -34,7 +34,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     }
     
     override func viewWillAppear(animated: Bool) {
-        answerData = 1
         mainQuestionIndex = 0
         scoresheet = Scoresheet(entries: [])
         if (questionList.count > 0) {
