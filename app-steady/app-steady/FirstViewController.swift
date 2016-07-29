@@ -92,7 +92,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         nextQuestionButton.setTitleColor(COLOR_TEXT, forState: UIControlState.Normal)
         nextQuestionButton.backgroundColor = COLOR_BUTTON
         nextQuestionButton.titleLabel?.font = UIFont(name: FONT_MEDIUM , size: 20.0)
-        nextQuestionButton.frame = CGRectMake(50, 600, 300, 50)
         nextQuestionButton.layer.cornerRadius = 5.0
         nextQuestionButton.translatesAutoresizingMaskIntoConstraints = false
         nextQuestionButton.addTarget(self, action: #selector(self.nextQuestionButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
@@ -109,7 +108,6 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     
     func initializeResultsButton(){
         resultsButton.setTitle("Results", forState: UIControlState.Normal)
-        resultsButton.frame = CGRectMake(300, 12, 75, 50)
         resultsButton.layer.cornerRadius = 5.0
         resultsButton.titleLabel?.font = UIFont(name: FONT_MEDIUM , size: 20.0)
         resultsButton.setTitleColor(COLOR_TEXT, forState: UIControlState.Normal)
@@ -249,11 +247,14 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
-    
+
     //MARK: Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let titleData = pickerData[row]
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: FONT_MEDIUM, size: 15.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()])
+        return myTitle
     }
+    
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         answerData = Int(pickerData[row])!
     }
