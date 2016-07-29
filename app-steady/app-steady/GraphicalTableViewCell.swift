@@ -11,9 +11,10 @@ import Charts
 
 class GraphicalTableViewCell: UITableViewCell {
     
-    var lineChart = LineChartView(frame: CGRectMake(0, 100, 400, 206))
+    var lineChart = LineChartView()
 
     var question: Question = Question(text: "", id: 0)
+    var questionLabel = UILabel()
     var x_label: String = ""
     var y_label: String = ""
     var x_bounds: [Int] = []
@@ -55,15 +56,15 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChart.legend.enabled = false
         lineChart.rightAxis.enabled = false
         lineChart.borderColor = COLOR_BORDER
+        lineChart.translatesAutoresizingMaskIntoConstraints = false
         lineChart.backgroundColor = COLOR_BACKGROUND
         
-        let questionLabel = UILabel(frame: CGRect.init(x: 0, y: -5, width: lineChart.frame.width, height: 100))
         questionLabel.text = questionText
         questionLabel.textColor = COLOR_TEXT
         questionLabel.backgroundColor = COLOR_TINT
         questionLabel.font = UIFont(name: FONT_MEDIUM, size: 20.0)
         questionLabel.textAlignment = NSTextAlignment.Center
-        
+        questionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(lineChart)
         self.addSubview(questionLabel)
@@ -86,6 +87,53 @@ class GraphicalTableViewCell: UITableViewCell {
         lineChartData.setDrawValues(false)
         lineChart.data = lineChartData
         
+    }
+    func initializeConstraints() {
+        
+        var allConstraints = [NSLayoutConstraint]()
+        let viewsFromTheSix = [
+            "questionLabel": questionLabel,
+            "lineChart": lineChart
+            ]
+        
+        // Question Label Button
+        
+        let horizontalQuestionLabelConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "|[questionLabel]|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += horizontalQuestionLabelConstraints
+        
+        let verticalQuestionLabelConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[questionLabel(40)]",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += verticalQuestionLabelConstraints
+        
+        
+        //Results Button
+        
+        let horizontalLineChartConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "|[lineChart]|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += horizontalLineChartConstraints
+        
+        let verticalLineChartConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:[questionLabel]-[lineChart]-|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += verticalLineChartConstraints
+        
+        NSLayoutConstraint.activateConstraints(allConstraints)
     }
 
 }

@@ -29,6 +29,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             scoresheets = data
             reformatResults(scoresheets)
             self.initializeTableView()
+            self.initializeConstraints()
         }
         SteadyAPI.getScoresheets(successfulScoresheetFetch, failureCallback: nil)
     }
@@ -70,12 +71,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func initializeTableView(){
-        tableView.frame         =   CGRectMake(0, 0, self.view.frame.width, self.view.frame.height - 100);
         tableView.delegate      =   self
         tableView.dataSource    =   self
         tableView.registerClass(GraphicalTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = (self.view.frame.height - 120) / 2
         tableView.sectionHeaderHeight = 70
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = COLOR_BACKGROUND
         tableView.separatorColor = UIColor.clearColor()
         self.view.addSubview(tableView)
@@ -96,6 +97,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.initializeLineChart(entries, questionText: prompts[questionId]!)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.backgroundColor = COLOR_BACKGROUND
+        cell.initializeConstraints()
         return cell
         
     }
@@ -126,6 +128,33 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tabBarController?.selectedIndex = 0
     }
     
+    func initializeConstraints() {
+        
+        var allConstraints = [NSLayoutConstraint]()
+        let viewsFromTheSix = [
+            "tableView": tableView,
+
+        ]
+    
+        //Results Button
+        
+        let horizontalTableViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "|[tableView]|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += horizontalTableViewConstraints
+        
+        let verticalTableViewConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[tableView]|",
+            options: [],
+            metrics: nil,
+            views: viewsFromTheSix)
+        
+        allConstraints += verticalTableViewConstraints
+        NSLayoutConstraint.activateConstraints(allConstraints)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
