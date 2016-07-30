@@ -92,7 +92,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell : GraphicalTableViewCell = GraphicalTableViewCell.init()
         let index = indexPath.row
         let questionId = Array(prompts.keys)[index]
-        let entries = items[questionId] as! NSMutableArray
+        let entries = items[questionId] as! [[AnyObject]]
         
         cell.initializeLineChart(entries, questionText: prompts[questionId]!)
         cell.selectionStyle = UITableViewCellSelectionStyle.None

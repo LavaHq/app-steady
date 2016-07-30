@@ -37,13 +37,17 @@ class GraphicalTableViewCell: UITableViewCell {
     }
 
     
-    func initializeLineChart(entries: NSMutableArray, questionText: String){
+    func initializeLineChart(entries: [[AnyObject]], questionText: String){
         
         var xVals:[String] = []
         var yVals : [Double] = []
         for entry in entries {
-            xVals.append(entry[0] as! String)
-            yVals.append(entry[1] as! Double)
+            
+            let x = entry[0] as! String
+            let y = entry[1] as! Double
+            
+            xVals.append(x)
+            yVals.append(y)
         }
         
         setChart(xVals, values: yVals)

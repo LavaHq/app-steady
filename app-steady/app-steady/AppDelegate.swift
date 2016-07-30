@@ -10,8 +10,8 @@ import UIKit
 
 
 // GLOBAL CONSTANTS
-//let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
-let UUID = "jar-asdjar"
+let UUID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+//let UUID = "jar-asdjar"
 
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercaseString

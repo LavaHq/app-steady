@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-let API_URI = "http://localhost:8000"
+let API_URI = "http://138.68.16.23"
 let ENDPOINT_PROMPTS = "/prompts"
 let ENDPOINT_ENTRIES = "/entries"
 let ENDPOINT_SCORESHEETS = "/scoresheets"

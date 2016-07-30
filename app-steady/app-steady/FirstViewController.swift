@@ -69,12 +69,13 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
     func initializeUIComponents(results: NSArray)
     {
         questionList = self.buildQuestions(results)
-        self.initializeQuestionLabel()
-        self.initializeAnswerPicker()
-        self.initializeNextQuestionButton()
-        self.initializeResultsButton()
-        
-        initializeConstraints()
+        if (questionList.count > 0) {
+            self.initializeQuestionLabel()
+            self.initializeAnswerPicker()
+            self.initializeNextQuestionButton()
+            self.initializeResultsButton()
+            initializeConstraints()
+        }
     }
     
     func initializeQuestionLabel() {
