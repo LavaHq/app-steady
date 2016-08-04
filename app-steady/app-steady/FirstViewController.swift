@@ -127,6 +127,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         ]
         let metrics = [
             "pickerButtonSpace": self.view.frame.height / 8,
+            "pickerButtonHeight": self.view.frame.height / 4,
             "buttonSize": self.view.frame.height / 7
         
         ]
@@ -192,7 +193,7 @@ class FirstViewController: UIViewController,UIPickerViewDataSource,UIPickerViewD
         allConstraints += horizontalAnswerPickerConstraints
         
         let verticalAnswerPickerConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:[questionLabel]-20-[answerPicker]-(pickerButtonSpace)-[nextQuestionButton]",
+            "V:[questionLabel]-20-[answerPicker(pickerButtonHeight)]-(pickerButtonSpace)-[nextQuestionButton]",
             options: [],
             metrics: metrics,
             views: viewsFromTheSix)
