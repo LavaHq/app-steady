@@ -68,6 +68,7 @@ class GraphicalTableViewCell: UITableViewCell {
         questionLabel.backgroundColor = COLOR_TINT
         questionLabel.font = UIFont(name: FONT_MEDIUM, size: 20.0)
         questionLabel.textAlignment = NSTextAlignment.Center
+        questionLabel.numberOfLines = 0
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.addSubview(lineChart)
@@ -111,7 +112,7 @@ class GraphicalTableViewCell: UITableViewCell {
         allConstraints += horizontalQuestionLabelConstraints
         
         let verticalQuestionLabelConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[questionLabel(40)]",
+            "V:|[questionLabel(55)]",
             options: [],
             metrics: nil,
             views: viewsFromTheSix)
