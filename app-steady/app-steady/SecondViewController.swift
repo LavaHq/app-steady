@@ -46,6 +46,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return navigationController?.hidesBarsOnSwipe ?? true
+    }
+    
     /*
      * Don't touch this function until API response is adjusted
      */
