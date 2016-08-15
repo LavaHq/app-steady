@@ -622,7 +622,7 @@
 			baseConfigurationReference = 3E4A1B11CE6DFB27F22D1BAD /* Pods-app-steady.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Daniel Habib (Z727ZKDHQ6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Daniel Habib (Z727ZKDHQ6)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "app-steady/Info.plist";
