@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		113BFE6A631CF6B4710FCDF3 /* Pods_app_steadyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 621D76E262E832D25A8BC04B /* Pods_app_steadyTests.framework */; };
+		1A5CAA381D6281780000A9E1 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5CAA371D6281780000A9E1 /* Onboarding.swift */; };
 		1AB9BAEB1D39AB94006A14A2 /* GraphicalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9BAEA1D39AB94006A14A2 /* GraphicalTableViewCell.swift */; };
 		1AC134321CD4198F00D70306 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134311CD4198F00D70306 /* Entry.swift */; };
 		1AC134341CD4199A00D70306 /* Scoresheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC134331CD4199A00D70306 /* Scoresheet.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A5CAA371D6281780000A9E1 /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		1AB9BAEA1D39AB94006A14A2 /* GraphicalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicalTableViewCell.swift; sourceTree = "<group>"; };
 		1AC134311CD4198F00D70306 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		1AC134331CD4199A00D70306 /* Scoresheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scoresheet.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				499182041CB5C7A400109052 /* Assets.xcassets */,
 				499182061CB5C7A400109052 /* LaunchScreen.storyboard */,
 				499182091CB5C7A400109052 /* Info.plist */,
+				1A5CAA371D6281780000A9E1 /* Onboarding.swift */,
 			);
 			path = "app-steady";
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 			files = (
 				1AC134341CD4199A00D70306 /* Scoresheet.swift in Sources */,
 				1AC134321CD4198F00D70306 /* Entry.swift in Sources */,
+				1A5CAA381D6281780000A9E1 /* Onboarding.swift in Sources */,
 				1AC134391CD41EBB00D70306 /* QuestionLabel.swift in Sources */,
 				499182001CB5C7A400109052 /* SecondViewController.swift in Sources */,
 				499181FC1CB5C7A400109052 /* AppDelegate.swift in Sources */,
